@@ -1,0 +1,93 @@
+<mat-sidenav-container autosize>
+    <mat-sidenav #sidenav mode="side" opened="true">
+        <mat-nav-list>
+
+            <mat-list-item>
+                <mat-icon mat-list-icon class="chevron-button sidenav-button" (click)="expanded = !expanded" [ngClass]="{'rotated': expanded}" >chevron_right</mat-icon>
+            </mat-list-item>
+
+            <mat-divider></mat-divider>
+
+            <mat-list-item *ngIf="(auth.authenticated | async) == true && expanded">
+                <span>Hi, {{user.name}}</span>
+            </mat-list-item>
+
+            <mat-divider></mat-divider>
+            
+            <mat-list-item routerLink="/dashboard">
+               <mat-icon mat-list-icon>home</mat-icon>
+               <span *ngIf="expanded" >Home</span>
+            </mat-list-item>
+
+            <mat-list-item routerLink="/info">
+                <mat-icon mat-list-icon>info</mat-icon>
+                <span *ngIf="expanded">Info</span>
+            </mat-list-item>
+
+            <mat-list-item routerLink="/user">
+                <mat-icon mat-list-icon>badge</mat-icon>
+                <span *ngIf="expanded" >Profile</span>
+            </mat-list-item>
+
+            <mat-list-item routerLink="/login" *ngIf="!(auth.authenticated | async) == true">
+                <mat-icon mat-list-icon>login</mat-icon>
+                <span *ngIf="expanded" >Login</span>
+            </mat-list-item>
+
+            <mat-list-item (click)="logout()" *ngIf="(auth.authenticated | async) == true">
+                <mat-icon mat-list-icon>phonelink_erase</mat-icon>
+                <span *ngIf="expanded" >Logout</span>
+            </mat-list-item>
+
+            <mat-list-item routerLink="/register" *ngIf="!(auth.authenticated | async) == true">
+                <mat-icon mat-list-icon>app_registration</mat-icon>
+                <span *ngIf="expanded" >Register</span>
+            </mat-list-item>
+        
+            </mat-nav-list>
+        
+    </mat-sidenav>
+    <div class="content">
+        <mat-toolbar>
+            <mat-icon style="margin-right: 10px;" mat-list-icon >menu_book</mat-icon>
+            <h1>BookStore</h1>
+            <div fxFlex fxLayoutAlign="flex-end center">
+                <button mat-button>
+                    <mat-icon matBadge="8" matBadgeSize="medium" matBadgePosition="after" matBadgeColor="accent">shopping_cart</mat-icon>
+                </button>
+                <button mat-icon-button [matMenuTriggerFor]="menu" >
+                    <mat-icon>person</mat-icon>
+                </button>
+                <mat-menu #menu="matMenu">
+                    <button mat-menu-item [disabled]="!(auth.authenticated | async) == true">
+                      <mat-icon>person</mat-icon>
+                      <span>Profile</span>
+                    </button>
+                    <button mat-menu-item [disabled]="!(auth.authenticated | async) == true">
+                        <mat-icon>auto_stories</mat-icon>
+                        <span>My Books</span>
+                    </button>
+                    <button mat-menu-item [disabled]="!(auth.authenticated | async) == true">
+                        <mat-icon>add_circle_outline</mat-icon>
+                        <span>Sell book</span>
+                    </button>
+                      <mat-divider></mat-divider>
+                    <button mat-menu-item routerLink="/login" *ngIf="!(auth.authenticated | async) == true" >
+                      <mat-icon>login</mat-icon>
+                      <span>Login</span>
+                    </button>
+                    <button mat-menu-item routerLink="/register" *ngIf="!(auth.authenticated | async) == true">
+                      <mat-icon>app_registration</mat-icon>
+                      <span>Register</span>
+                    </button>
+                    <button mat-menu-item routerLink="/login" (click)="logout()" *ngIf="(auth.authenticated | async) == true">
+                        <mat-icon>phonelink_erase</mat-icon>
+                        <span>Logout</span>
+                      </button>
+                  </mat-menu>
+            </div>
+        </mat-toolbar>
+        <router-outlet></router-outlet>
+    </div>
+
+</mat-sidenav-container>
