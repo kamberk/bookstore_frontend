@@ -1,0 +1,62 @@
+
+
+<div class="limiter">
+    <div *ngIf="isLoading">
+        <app-spiner></app-spiner>
+    </div>
+    <div class="container-login100" *ngIf="!isLoading">
+        <div class="wrap-login100">
+            <div class="login100-form-title" style="background-image: url(https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8c3R1ZHl8ZW58MHx8MHx8&ixlib=rb-1.2.1&w=1000&q=80);">
+                <span class="login100-form-title-1">
+                    Sign UP
+                </span>
+            </div>
+
+            <form class="login100-form validate-form" [formGroup]="signupForm" (ngSubmit)="onSubmit()">
+                <div class="wrap-input100 validate-input m-b-26" data-validate="Email is required">
+                    <span class="label-input100">Email</span>
+                    <input class="input100" type="text" name="username" formControlName="email" placeholder="Enter email">
+                    <span class="focus-input100"></span>
+                </div>
+
+                <div class="wrap-input100 validate-input m-b-26" data-validate="Name is required">
+                    <span class="label-input100">First Name</span>
+                    <input class="input100" type="text" name="username" formControlName="name" placeholder="Enter name">
+                    <span class="focus-input100"></span>
+                </div>
+
+                <div class="wrap-input100 validate-input m-b-26" data-validate="Last name is required">
+                    <span class="label-input100">Last Name</span>
+                    <input class="input100" type="text" name="username" formControlName="surname" placeholder="Enter last name">
+                    <span class="focus-input100"></span>
+                </div>
+
+                <div class="wrap-input100 validate-input m-b-18" data-validate = "Password is required">
+                    <span class="label-input100">Password</span>
+                    <!-- <input class="input100" id="pass" type="password" name="pass" formControlName="password" placeholder="Enter password">
+                    <span class="focus-input100"></span> -->
+                    <mat-form-field appearance="fill">
+                        <mat-label>Enter your password</mat-label>
+                        <input style="color: black;" matInput [type]="hide ? 'password' : 'text'" formControlName="password">
+                        <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                          <mat-icon style="color: black;">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                        </button>
+                      </mat-form-field>
+                </div>
+
+
+                <div class="flex-sb-m w-full p-b-30">
+                    <mat-error *ngIf="eror != undefined">
+                        {{eror}}
+                    </mat-error>
+                </div>
+
+                <div class="container-login100-form-btn">
+                    <button [disabled]="!signupForm.valid" class="login100-form-btn" type="submit" value="submit" >
+                        Signup
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

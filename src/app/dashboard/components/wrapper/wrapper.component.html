@@ -1,14 +1,14 @@
 <mat-sidenav-container autosize>
     <mat-sidenav #sidenav mode="side" opened="true">
         <mat-nav-list>
-
+            
             <mat-list-item>
                 <mat-icon mat-list-icon class="chevron-button sidenav-button" (click)="expanded = !expanded" [ngClass]="{'rotated': expanded}" >chevron_right</mat-icon>
             </mat-list-item>
 
             <mat-divider></mat-divider>
 
-            <mat-list-item *ngIf="(auth.authenticated | async) == true && expanded">
+            <mat-list-item disabled *ngIf="(auth.authenticated | async) == true && expanded">
                 <span>Hi, {{user.name}}</span>
             </mat-list-item>
 
@@ -48,6 +48,7 @@
         
     </mat-sidenav>
     <div class="content">
+        
         <mat-toolbar>
             <mat-icon style="margin-right: 10px;" mat-list-icon >menu_book</mat-icon>
             <h1>BookStore</h1>

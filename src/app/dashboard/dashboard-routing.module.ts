@@ -1,11 +1,12 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { ActivateAccountComponent } from './components/activate-account/activate-account.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { InfoComponent } from './components/info/info.component';
 import { LoginComponent } from './components/login/login.component';
 import { NewPasswordComponent } from './components/new-password/new-password.component';
-import { RegisterComponent } from './components/register/register.component';
 import { RestartPassComponent } from './components/restart-pass/restart-pass.component';
+import { SignupComponent } from './components/signup/signup.component';
 import { UserComponent } from './components/user/user.component';
 import { WrapperComponent } from './components/wrapper/wrapper.component';
 
@@ -32,7 +33,7 @@ const routes: Routes = [
             },
             {
                 path: 'register',
-                component: RegisterComponent
+                component: SignupComponent
             },
             {
                 path: 'restart-password',
@@ -41,6 +42,10 @@ const routes: Routes = [
             {
                 path: 'new-pass/:token',
                 component: NewPasswordComponent
+            },
+            {
+                path: 'activate/:token',
+                component: ActivateAccountComponent
             }
         ]
     },

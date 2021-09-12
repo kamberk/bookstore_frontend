@@ -11,7 +11,6 @@ import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatIconModule} from '@angular/material/icon';
 import {MatListModule} from '@angular/material/list';
 import { LoginComponent } from './components/login/login.component';
-import { RegisterComponent } from './components/register/register.component';
 import {MatCardModule} from '@angular/material/card';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner'
 import {MatButtonModule} from '@angular/material/button';
@@ -27,6 +26,9 @@ import {MatMenuModule} from '@angular/material/menu';
 import { RestartPassComponent } from './components/restart-pass/restart-pass.component';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import { NewPasswordComponent } from './components/new-password/new-password.component';
+import { SignupComponent } from './components/signup/signup.component';
+import {MatInputModule} from '@angular/material/input';
+import { ActivateAccountComponent } from './components/activate-account/activate-account.component';
 
 const routes: Routes = [];
 
@@ -37,10 +39,11 @@ const routes: Routes = [];
     InfoComponent,
     UserComponent,
     LoginComponent,
-    RegisterComponent,
     SpinerComponent,
     RestartPassComponent,
     NewPasswordComponent,
+    SignupComponent,
+    ActivateAccountComponent,
   ],
   imports: [
     CommonModule,
@@ -62,7 +65,9 @@ const routes: Routes = [];
     MatBadgeModule,
     MatMenuModule,
     MatSnackBarModule,
-    RouterModule
+    RouterModule,
+    MatFormFieldModule,
+    MatInputModule,
   ]
 })
 export class DashboardModule { }
