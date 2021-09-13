@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-new-password',
@@ -19,7 +19,8 @@ export class NewPasswordComponent implements OnInit {
     private formBilder: FormBuilder,
     private http: HttpClient,
     private snack: MatSnackBar,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
@@ -39,6 +40,7 @@ export class NewPasswordComponent implements OnInit {
         this.snack.open(this.message, "Close!", {
           duration: 5000
         })
+        this.router.navigate(['/login']);
       },
       (err: any) => {
         this.isLoading = true;
