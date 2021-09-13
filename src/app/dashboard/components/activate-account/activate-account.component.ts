@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
 
@@ -10,39 +11,42 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class ActivateAccountComponent implements OnInit {
 
+  tokenForm!: FormGroup;
   isLoading = false;
   token: any;
+  message: any;
   constructor(
+    private formBilder: FormBuilder,
     private http: HttpClient,
     private snack: MatSnackBar,
     private activatedRoute: ActivatedRoute,
-    private router: Router
+    private router: Router,
     ) { }
 
   ngOnInit(): void {
+    this.token = this.activatedRoute.snapshot.params.token;
+    this.tokenForm = this.formBilder.group({
+      token: new FormControl(`${this.token}`)
+    }); 
   }
   
-  async activate(): Promise<void> {
-    console.log('pressed')
+  activate() {
     this.isLoading = true;
-    this.token = this.activatedRoute.snapshot.params.token;
-    if(this.token){      
-      await this.http.get('http://localhost:8080/user/activate-acc/'+this.token).subscribe(
-        res => {
-          console.log(res)
-        },
-        err => {
-          console.log(err)
-        }
-      )
-      }
-      setTimeout( () => {
-        this.isLoading = true;
-        this.snack.open('Accout activated successfully', 'Close!', {
+    this.http.get(`http://localhost:8080/user/activate-acc/${this.token}`).subscribe(
+      (res: any) => {
+        console.log(res)
+        this.isLoading = false;
+        this.message = res.message;
+        this.snack.open(this.message, 'Close!', {
           duration: 5000
         });
         this.router.navigate(['/login']);
-      }, 2000);
+      },
+      err => {
+        console.log(err);
+        this.isLoading = false;
+      }
+    )
   }
 
 }
