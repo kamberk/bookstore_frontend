@@ -37,13 +37,9 @@
                     <span class="focus-input100"></span> -->
                     <mat-form-field appearance="fill">
                         <mat-label>Enter your password</mat-label>
-                        <input style="color: black;" matInput [type]="hide ? 'password' : 'text'" formControlName="password">
-                        <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
-                          <mat-icon style="color: black;">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
-                        </button>
+                        <input style="color: black; width: 100%;" type="password" placeholder="Enter password" matInput formControlName="password">
                       </mat-form-field>
                 </div>
-
 
                 <div class="flex-sb-m w-full p-b-30">
                     <mat-error *ngIf="eror != undefined">
