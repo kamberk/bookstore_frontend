@@ -37,8 +37,14 @@ export class SignupComponent implements OnInit {
   }
 
   onSubmit(){
-    this.isLoading = true;
-    this.http.post('http://localhost:8080/user/signup', this.signupForm.value).subscribe(
+    if(!this.signupForm.valid) {
+      this.eror = "Please fill all fields!"
+      this.snack.open(this.eror, "Close!", {
+        duration: 3000
+      });
+    } else {
+      this.isLoading = true;
+      this.http.post('http://localhost:8080/user/signup', this.signupForm.value).subscribe(
       (res:any) => {
         console.log(res);
         this.isLoading = false;
@@ -54,8 +60,9 @@ export class SignupComponent implements OnInit {
           duration: 50000,
         })
       }
-    )
-    this.signupForm.reset();
+      )
+      this.signupForm.reset();
+    }
   }
 
 }
