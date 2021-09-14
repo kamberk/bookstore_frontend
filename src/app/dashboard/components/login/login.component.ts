@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
+import { CookieService } from 'ngx-cookie-service';
 import { AuthService } from '../../auth.service';
 
 @Component({
@@ -23,7 +24,8 @@ export class LoginComponent implements OnInit {
     private http: HttpClient,
     private router: Router,
     private auth: AuthService,
-    private snack: MatSnackBar
+    private snack: MatSnackBar,
+    private cookie: CookieService
   ) { }
 
   async ngOnInit(): Promise<void> {
@@ -45,6 +47,7 @@ export class LoginComponent implements OnInit {
         (res: any) => {
           localStorage.setItem('profile', JSON.stringify(res.result));
           localStorage.setItem('token', res.token);
+          this.cookie.set('token', res.token);
           this.auth.authenticate(res.token);
           this.router.navigate(['/dashboard']);
           this.isLoading = false;
