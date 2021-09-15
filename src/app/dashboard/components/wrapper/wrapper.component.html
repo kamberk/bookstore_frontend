@@ -24,7 +24,7 @@
                 <span *ngIf="expanded">Info</span>
             </mat-list-item>
 
-            <mat-list-item routerLink="/user">
+            <mat-list-item routerLink="/user" *ngIf="(auth.authenticated | async) == true">
                 <mat-icon mat-list-icon>badge</mat-icon>
                 <span *ngIf="expanded" >Profile</span>
             </mat-list-item>
@@ -48,7 +48,7 @@
         
     </mat-sidenav>
     <div class="content">
-        
+    
         <mat-toolbar>
             <mat-icon style="margin-right: 10px;" mat-list-icon >menu_book</mat-icon>
             <h1>BookStore</h1>
@@ -88,7 +88,6 @@
                   </mat-menu>
             </div>
         </mat-toolbar>
-        <router-outlet></router-outlet>
     </div>
-
+        <router-outlet></router-outlet>
 </mat-sidenav-container>

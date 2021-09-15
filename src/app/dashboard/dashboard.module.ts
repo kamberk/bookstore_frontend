@@ -29,6 +29,7 @@ import { NewPasswordComponent } from './components/new-password/new-password.com
 import { SignupComponent } from './components/signup/signup.component';
 import {MatInputModule} from '@angular/material/input';
 import { ActivateAccountComponent } from './components/activate-account/activate-account.component';
+import {MatStepperModule} from '@angular/material/stepper';
 
 const routes: Routes = [];
 
@@ -68,6 +69,7 @@ const routes: Routes = [];
     RouterModule,
     MatFormFieldModule,
     MatInputModule,
+    MatStepperModule
   ]
 })
 export class DashboardModule { }
