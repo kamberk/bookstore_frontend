@@ -40,7 +40,7 @@ export class UserComponent implements OnInit {
       thirdCtrl: [`${this.user?.grad}`, Validators.required],
     });
     this.fourthFormGroup = this._formBuilder.group({
-      fourthCtrl: [`${this.user?.zipCode}`, Validators.required],
+      fourthCtrl: [`${this.user?.zipcode}`, Validators.required],
     });
     
   }
@@ -52,7 +52,7 @@ export class UserComponent implements OnInit {
     this.forma = this._formBuilder.group({
       ulica: [`${this.secondFormGroup.value.secondCtrl}`],
       opstina: [`${this.thirdFormGroup.value.thirdCtrl}`],
-      zipCode: [`${localStorage.getItem('code')}`]
+      zipcode: [`${this.fourthFormGroup.value.fourthCtrl}`]
     });
     console.log(this.forma.value);
     this.http.post('http://localhost:8080/user/delivery-info', this.forma.value, {headers: this.headers}).subscribe(
