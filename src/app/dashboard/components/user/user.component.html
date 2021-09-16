@@ -2,7 +2,7 @@
 <div class="container">
     <div class="main-body">
     
-          <div class="row gutters-sm" style="margin-top: 50px;">
+          <div class="row gutters-sm" style="margin-top: 50px;" *ngIf="!isLoading">
             <div class="col-md-4 mb-3">
               <div class="card">
                 <div class="card-body">
@@ -11,8 +11,10 @@
                     <div class="mt-3">
                       <h4>{{user?.name}} {{user?.surname}}</h4>
                       <p class="text-secondary mb-1">{{user?.email}}</p>
-                      <!-- <button class="btn btn-primary">Follow</button>
-                      <button class="btn btn-outline-primary">Message</button> -->
+                      <button mat-raised-button
+                      color="warn" style="margin-top: 5px;"
+                      (click)="openDialog()"
+                      >Delete account</button>
                     </div>
                   </div>
                 </div>
@@ -61,7 +63,7 @@
                             </button>
                       <button mat-raised-button
                               color="warn"
-                              style="float: right;"
+                              style="float: right; margin-right: 10px;"
                               routerLink='/restart-password'>Change password</button>
                     </div>
                   </div>
@@ -74,10 +76,11 @@
 
         </div>
     </div>
+    <mat-divider style="margin-top: 5px; margin-bottom: 5px; width: 80%; margin-left: auto; margin-right: auto;"></mat-divider>
     <div style="width: 80%; margin: auto; color: white;">
         <h1 style="margin: auto;">Edit delivery info<span style="margin-left: 10px;" class="glyphicon glyphicon-envelope"></span></h1>
     </div>
-    <mat-divider></mat-divider>
+    <mat-divider style="margin-top: 5px; margin-bottom: 5px; width: 80%; margin-left: auto; margin-right: auto;"></mat-divider>
     <div *ngIf="isLoading">
         <app-spiner></app-spiner>
     </div> 
@@ -85,7 +88,7 @@
         <mat-step [stepControl]="firstFormGroup">
           <form [formGroup]="firstFormGroup">
             <ng-template matStepLabel>Is your email right?</ng-template>
-            <mat-form-field appearance="fill">
+            <mat-form-field appearance="fill" style="width: 80%;" [style.fontSize.px]=14>
               <mat-label>Email</mat-label>
               <input matInput formControlName="firstCtrl" placeholder="Last name, First name" required>
             </mat-form-field>
@@ -97,7 +100,7 @@
         <mat-step [stepControl]="secondFormGroup">
           <form [formGroup]="secondFormGroup">
             <ng-template matStepLabel>Street and house number:</ng-template>
-            <mat-form-field appearance="fill">
+            <mat-form-field appearance="fill" style="width: 80%;" [style.fontSize.px]=14>
               <mat-label>Street and house number:</mat-label>
               <input matInput formControlName="secondCtrl" placeholder="Street and house number"
                      required>
@@ -110,7 +113,7 @@
         <mat-step [stepControl]="thirdFormGroup">
             <form [formGroup]="thirdFormGroup">
               <ng-template matStepLabel>Municipality / Place:</ng-template>
-              <mat-form-field appearance="fill">
+              <mat-form-field appearance="fill" style="width: 80%;" [style.fontSize.px]=14>
                 <mat-label>Municipality / Place:</mat-label>
                 <input matInput formControlName="thirdCtrl" placeholder="Municipality / Place"
                        required>
@@ -124,7 +127,7 @@
           <mat-step [stepControl]="fourthFormGroup">
             <form [formGroup]="fourthFormGroup">
               <ng-template matStepLabel>Zip Code:</ng-template>
-              <mat-form-field appearance="fill">
+              <mat-form-field appearance="fill" style="width: 80%;" [style.fontSize.px]=14>
                 <mat-label>Zip Code:</mat-label>
                 <input matInput formControlName="fourthCtrl" placeholder="Zip Code" 
                        required>
@@ -137,7 +140,7 @@
           </mat-step>
         <mat-step>
           <ng-template matStepLabel>Save</ng-template>
-          <p>You can save delivery information now</p>
+          <h3 style="color: white;">You can save delivery information now</h3>
           <div>
             <button mat-raised-button color="warn" matStepperPrevious>Back</button>
             <button mat-raised-button color="accent" (click)="onSubmit()">Save</button>

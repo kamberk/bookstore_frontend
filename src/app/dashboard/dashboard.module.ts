@@ -30,6 +30,8 @@ import { SignupComponent } from './components/signup/signup.component';
 import {MatInputModule} from '@angular/material/input';
 import { ActivateAccountComponent } from './components/activate-account/activate-account.component';
 import {MatStepperModule} from '@angular/material/stepper';
+import { MatDialogModule } from '@angular/material/dialog';
+import { ConfDialogComponent } from './components/conf-dialog/conf-dialog.component';
 
 const routes: Routes = [];
 
@@ -45,6 +47,7 @@ const routes: Routes = [];
     NewPasswordComponent,
     SignupComponent,
     ActivateAccountComponent,
+    ConfDialogComponent,
   ],
   imports: [
     CommonModule,
@@ -69,7 +72,8 @@ const routes: Routes = [];
     RouterModule,
     MatFormFieldModule,
     MatInputModule,
-    MatStepperModule
+    MatStepperModule,
+    MatDialogModule,
   ]
 })
 export class DashboardModule { }

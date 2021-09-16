@@ -1,7 +1,11 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Router } from '@angular/router';
+import { AuthService } from '../../auth.service';
+import { ConfDialogComponent } from '../conf-dialog/conf-dialog.component';
 
 @Component({
   selector: 'app-user',
@@ -27,6 +31,9 @@ export class UserComponent implements OnInit {
     private _formBuilder: FormBuilder,
     private http: HttpClient,
     private snack: MatSnackBar,
+    private dialog: MatDialog,
+    private router: Router,
+    private auth: AuthService
   ) { }
 
   ngOnInit(): void {
@@ -69,6 +76,45 @@ export class UserComponent implements OnInit {
         this.isLoading = false;
       }
     )
+  }
+
+  openDialog() {
+    const dialogRef = this.dialog.open(ConfDialogComponent, {
+      data: {
+        message: 'Are you sure you want to delete your account?',
+        buttonText: {
+          ok: 'Delete!',
+          cancel: 'Cancel'
+        }
+      }
+    })
+    this.isLoading = true;
+    dialogRef.afterClosed().subscribe((confirmed: boolean) => {
+      if(confirmed) {
+        this.http.delete('http://localhost:8080/user/deleteUser', {headers: this.headers}).subscribe(
+          (res: any) => {
+            this.message = res.message;
+            this.snack.open(this.message, 'Close!', {
+              duration: 5000
+            });
+            this.isLoading = false;
+            localStorage.removeItem('token');
+            localStorage.removeItem('profile');
+            this.auth.deauthenticate();
+            this.router.navigate(['/register']);
+          },
+          (err: any) => {
+            this.message = err.error.message;
+            this.snack.open(this.message, 'Close!', {
+              duration: 5000
+            });
+            this.isLoading = false;
+          }
+        )
+      } else {
+        this.isLoading = false;
+      }
+    })
   }
 
 }
