@@ -4,9 +4,11 @@
 <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 </head>
 <div class="container"> 
+    
     <div *ngIf="isLoading">
         <app-spiner></app-spiner>
-    </div>   
+    </div>  
+
     <div id="loginbox" *ngIf="!isLoading" style="margin-top:150px;" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">                    
         <div class="panel panel-info" >
                 <div class="panel-heading">
