@@ -32,6 +32,7 @@ import { ActivateAccountComponent } from './components/activate-account/activate
 import {MatStepperModule} from '@angular/material/stepper';
 import { MatDialogModule } from '@angular/material/dialog';
 import { ConfDialogComponent } from './components/conf-dialog/conf-dialog.component';
+import { SeeMoreComponent } from './components/see-more/see-more.component';
 
 const routes: Routes = [];
 
@@ -48,6 +49,7 @@ const routes: Routes = [];
     SignupComponent,
     ActivateAccountComponent,
     ConfDialogComponent,
+    SeeMoreComponent,
   ],
   imports: [
     CommonModule,

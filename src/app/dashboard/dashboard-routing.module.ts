@@ -6,6 +6,7 @@ import { InfoComponent } from './components/info/info.component';
 import { LoginComponent } from './components/login/login.component';
 import { NewPasswordComponent } from './components/new-password/new-password.component';
 import { RestartPassComponent } from './components/restart-pass/restart-pass.component';
+import { SeeMoreComponent } from './components/see-more/see-more.component';
 import { SignupComponent } from './components/signup/signup.component';
 import { UserComponent } from './components/user/user.component';
 import { WrapperComponent } from './components/wrapper/wrapper.component';
@@ -46,6 +47,10 @@ const routes: Routes = [
             {
                 path: 'activate/:token',
                 component: ActivateAccountComponent
+            },
+            {
+                path: 'see-more/:id',
+                component: SeeMoreComponent
             }
         ]
     },
