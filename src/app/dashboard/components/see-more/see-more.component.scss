@@ -1,0 +1,87 @@
+.container {
+        width: 100%;
+        background-color: rgb(255, 255, 255);
+        margin-top: 0;
+        padding-top: 5rem;
+        padding-bottom: 5rem;
+        display: block;
+        text-align: center;
+    }
+
+    .leva-kolona {
+        h1 {
+            color: black;
+        }
+        img {
+            max-height: 350px;
+            width: 100%;
+        }
+        .myresult {
+            display: none;
+        }
+    }
+
+    .desna-kolona {
+        color: black;
+        .mobile-autori {
+            display: none;
+        }
+
+        h1 {
+            font-weight: bold;
+        }
+
+        .boldiraj {
+            font-weight: bold;
+        }
+
+        .addToCart {
+            margin-top: 2rem;
+            padding: 1rem;
+        }
+
+        .kolicina {
+            text-align: center;
+            justify-content: center;
+            display: flex;
+            button {
+                cursor: pointer;
+                font-size: 2.5rem;
+                height: 40px;
+                width: 40px;
+                border: none;
+                border-radius: 0;
+            }
+            input {
+                height: 40px;
+                text-align: center;
+            }
+        }
+
+    }
+@media only screen and (min-width: 820px) {
+
+    .container {
+        display: flex;
+        text-align: center;
+        justify-content: space-between;
+
+        .leva-kolona {
+            h1 {
+                display: none;
+            }
+            img:hover {
+                margin-top: 5rem;
+                transform: scale(1.5);
+            }
+        }
+    
+        .desna-kolona {
+            
+            .mobile-autori {
+                display: flex;
+                color: black;
+            }
+        }
+    }
+}

@@ -1,3 +1,38 @@
 <div *ngIf="isLoading">
     <app-spiner></app-spiner>
 </div>
+
+<div *ngIf="!isLoading" class="container">
+    <div class="leva-kolona">
+        <h1>{{knjiga?.naslov}}</h1>
+        <mat-divider></mat-divider>
+        <img src="{{knjiga?.slika}}">
+    </div>
+    <div class="desna-kolona">
+        <h1 class="mobile-autori">{{knjiga?.naslov}}</h1>
+        <hr  style="color: black;">
+        <div class="autori">
+            <h3>Autori:</h3>
+            <h3 
+                style="color: rgb(0, 0, 0); font-weight: bold;">
+                    {{knjiga?.autori}}</h3>
+        </div>
+        <hr  style="color: black;">
+        <h4>Izdavac: <span class="boldiraj">{{knjiga?.izdavac}}</span></h4>
+        <h4>ISBN: <span class="boldiraj">{{knjiga?.ISBN}}</span></h4>
+        <hr  style="color: black;">
+        <h1>{{knjiga?.cena}},00 RSD</h1>
+        <h3>Kolicina: <span class="boldiraj">{{knjiga?.kolicina}}</span></h3>
+        <hr  style="color: black;">
+        <form>
+            <h2>Komada:</h2>
+            <div class="kolicina">
+                <button mat-raised-button color="primary" class="umanji" (click)="umanji()">-</button>
+                <input type="number" min="1" max="{{knjiga?.kolicina}}" value="{{quantity}}" title="Kolicina" size="4">
+                <button mat-raised-button color="primary" class="uvecaj" (click)="uvecaj()">+</button> <br>
+            </div>
+            <h2>Ukupno: {{ukupno}} RSD</h2>
+            <button class="addToCart" mat-raised-button color="primary">Dodaj u korpu <mat-icon>shopping_cart</mat-icon></button>
+        </form>
+    </div>
+</div>

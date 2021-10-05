@@ -14,6 +14,8 @@ export class SeeMoreComponent implements OnInit {
   id: any;
   knjiga: any;
   message: any;
+  quantity = 1;
+  ukupno: any;
 
   constructor(
     private http: HttpClient,
@@ -24,18 +26,34 @@ export class SeeMoreComponent implements OnInit {
   ngOnInit(): void {
     this.isLoading = true;
     this.id = this.activatedRoute.snapshot.params.id;
-    console.log(this.id);
     this.http.get('http://localhost:8080/api/get-by-id/' + this.id, this.id).subscribe(
       (res: any) => {
-        console.log(res);
+        // console.log(res);
         this.knjiga = res;
+        this.isLoading = false;
+        this.ukupno = res.cena;
       },
       (err: any) => {
-        console.log(err)
-        
+        this.message = err.error.message;
+        this.snack.open(this.message, 'Close!', {
+          duration: 4000
+        });
       }
-    )
+      )
   }
 
+  uvecaj() {
+    if(this.quantity < this.knjiga.kolicina) {
+      this.quantity++;
+      this.ukupno = this.knjiga.cena * this.quantity;
+    }
+  }
+
+  umanji() {
+    if(this.quantity >= 2) {
+      this.quantity--;
+      this.ukupno = this.knjiga.cena * this.quantity;
+    }
+  }
 
 }
