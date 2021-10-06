@@ -2,6 +2,8 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../auth.service';
 import { Router } from '@angular/router';
+import { CartService } from '../../cart.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-dashboard',
@@ -18,7 +20,9 @@ export class DashboardComponent implements OnInit {
   constructor(
     private http: HttpClient,
     public auth: AuthService,
-    private router: Router
+    private router: Router,
+    private cart: CartService,
+    private snack: MatSnackBar
   ) { }
 
   ngOnInit(): void {
@@ -37,6 +41,22 @@ export class DashboardComponent implements OnInit {
 
   preusmeri(id: any) {
     this.router.navigate([`/see-more/${id}`])
+  }
+
+  addtoCart(id: any, kolicina: any, naslov: any) {
+
+    const token = localStorage.getItem('token');
+    if(!token) {
+      this.snack.open('Ulogujte se da bi ste dodavali proizvode u korpu!', 'Close!', {
+        duration: 5000
+      });
+    } else {
+      this.cart.addToCart(id, kolicina, naslov);
+      this.snack.open('Uspesno dodato!', 'Close!', {
+        duration: 5000
+      });
+      location.reload();
+    }
   }
 
 }

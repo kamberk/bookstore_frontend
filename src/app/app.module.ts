@@ -9,6 +9,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { IconsModule, MDBBootstrapModule } from 'angular-bootstrap-md';
 import { ButtonsModule, WavesModule, CardsModule } from 'angular-bootstrap-md'
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { HttpClientModule } from '@angular/common/http';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 
 @NgModule({
@@ -27,7 +29,9 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     WavesModule,
     CardsModule,
     IconsModule,
-    FlexLayoutModule
+    FlexLayoutModule,
+    HttpClientModule,
+    MatSnackBarModule
   ],
   providers: [],
   bootstrap: [AppComponent]

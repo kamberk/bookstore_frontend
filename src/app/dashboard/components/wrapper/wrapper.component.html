@@ -3,7 +3,7 @@
         <mat-nav-list>
             
             <mat-list-item>
-                <mat-icon mat-list-icon class="chevron-button sidenav-button" (click)="expanded = !expanded" [ngClass]="{'rotated': expanded}" >chevron_right</mat-icon>
+                <mat-icon style="width: 100%; text-align: center;" mat-list-icon class="chevron-button sidenav-button" (click)="expanded = !expanded" [ngClass]="{'rotated': expanded}" >chevron_right</mat-icon>
             </mat-list-item>
 
             <mat-divider></mat-divider>
@@ -53,9 +53,36 @@
             <mat-icon style="margin-right: 10px;" mat-list-icon >menu_book</mat-icon>
             <h1>BookStore</h1>
             <div fxFlex fxLayoutAlign="flex-end center">
-                <button mat-button>
-                    <mat-icon matBadge="8" matBadgeSize="medium" matBadgePosition="after" matBadgeColor="accent">shopping_cart</mat-icon>
+                <button mat-icon-button [matMenuTriggerFor]="cart" >
+                    <mat-icon matBadge="{{cartItems?.length || 0}}" matBadgeSize="medium" matBadgePosition="after" matBadgeColor="accent">shopping_cart</mat-icon>
                 </button>
+                <mat-menu #cart="matMenu">
+                    <div *ngFor="let item of cartItems" class="kartica"> 
+                            <div class="proizvodi">
+                                <div class="slika-levo">
+                                    <img src="{{item?.slika}}">
+                                </div>
+                                <div class="naziv-desno">
+                                    <h3>
+                                        {{item?.naziv}}
+                                    </h3>
+                                    <p>{{item?.cena}}</p>
+                                    <button mat-raised-button color="warn" (click)="removeOne(item._id)">
+                                        <mat-icon>delete</mat-icon>
+                                    </button>
+                                </div>
+                            </div>
+                    </div>
+                    <div class="dno">
+                        <h3 class="ukupno">Ukupno: {{ukupno}} RSD</h3>
+                        <button mat-raised-button color="warn" (click)="isprazni()">
+                            Isprazni <mat-icon>delete</mat-icon>
+                        </button>
+                        <button mat-raised-button color="primary" style="margin-left: 1rem;" routerLink="/cart">
+                            Kartica <mat-icon>shopping_cart</mat-icon>
+                        </button>
+                    </div>
+                </mat-menu>
                 <button mat-icon-button [matMenuTriggerFor]="menu" >
                     <mat-icon>person</mat-icon>
                 </button>
@@ -64,14 +91,12 @@
                       <mat-icon>person</mat-icon>
                       <span>Profile</span>
                     </button>
-                    <button mat-menu-item [disabled]="!(auth.authenticated | async) == true">
-                        <mat-icon>auto_stories</mat-icon>
-                        <span>My Books</span>
+
+                    <button mat-menu-item routerLink="/cart" [disabled]="!(auth.authenticated | async) == true">
+                        <mat-icon>shopping_cart</mat-icon>
+                        <span>My Cart</span>
                     </button>
-                    <button mat-menu-item [disabled]="!(auth.authenticated | async) == true">
-                        <mat-icon>add_circle_outline</mat-icon>
-                        <span>Sell book</span>
-                    </button>
+
                       <mat-divider></mat-divider>
                     <button mat-menu-item routerLink="/login" *ngIf="!(auth.authenticated | async) == true" >
                       <mat-icon>login</mat-icon>

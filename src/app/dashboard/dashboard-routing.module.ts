@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { ActivateAccountComponent } from './components/activate-account/activate-account.component';
+import { CartComponent } from './components/cart/cart.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { InfoComponent } from './components/info/info.component';
 import { LoginComponent } from './components/login/login.component';
@@ -51,6 +52,10 @@ const routes: Routes = [
             {
                 path: 'see-more/:id',
                 component: SeeMoreComponent
+            },
+            {
+                path: 'cart',
+                component: CartComponent
             }
         ]
     },

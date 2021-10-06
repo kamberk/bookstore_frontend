@@ -17,3 +17,66 @@ mat-sidenav-container {
         }
     }
 }
+
+.kartica {
+    display: flex;
+    margin: 1rem 1rem 1rem 1rem;
+    color: white;
+    // width: 30rem;
+    text-align: center;
+    justify-content: space-between;
+    align-items: center;
+
+    .proizvodi {
+        display: flex;
+        text-align: center;
+        width: 100%;
+        justify-content: space-evenly;
+    
+        .slika-levo {
+            float: left;
+            display: flex;
+            
+            img {
+                width: 30px;
+                height: 30px;
+            }
+        }
+        .naziv-desno {
+            margin-left: .7rem;
+            text-align: center;
+            display: flex;
+    
+            p {
+                float: right;
+                margin-top: 1.3rem;
+                margin-left: 1rem;
+            }
+    
+            button {
+                width: 30px;
+                height: 30px;
+                margin-left: .7rem;
+                text-align: center;
+                float: right;
+            }
+        }
+    }
+}
+
+
+.dno {
+    display: block;
+    text-align: center;
+    color: white;
+
+    button {
+        text-align: center;
+        margin: auto;
+    }
+
+    h3 {
+        color: white;
+        text-align: center;
+    }
+}
