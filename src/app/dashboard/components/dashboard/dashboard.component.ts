@@ -12,10 +12,12 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 })
 export class DashboardComponent implements OnInit {
 
+  isLoading = false;
   gridColumns = 3;
   user: any;
   token = localStorage.getItem('token');
   books: any;
+  page = 1;
 
   constructor(
     private http: HttpClient,
@@ -26,21 +28,73 @@ export class DashboardComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    
+    this.isLoading = true;
     this.user = JSON.parse(localStorage?.getItem('profile') || '{}');
-    this.http.get('http://localhost:8080/api/get-books').subscribe(
+    this.http.get(`http://localhost:8080/api/get-books/${this.page}`).subscribe(
       (res: any) => {
         console.log(res)
-        this.books = res;
+        this.books = res.results;
+        this.isLoading = false;
       },
       (err: any) => {
         console.log(err);
+        this.isLoading = false;
       }
     )
   }
 
   preusmeri(id: any) {
     this.router.navigate([`/see-more/${id}`])
+  }
+
+  nextPage() {
+    this.page++;
+    this.http.get(`http://localhost:8080/api/get-books/${this.page}`).subscribe(
+      (res: any) => {
+        console.log(res)
+        if(res.results.length != 0) {
+          this.books = res.results;
+          this.isLoading = false;
+        } else {
+          this.snack.open('Stigli ste do poslednje stranice!', 'Zatvori!', {
+            duration: 5000
+          });
+          this.page--;
+        }
+      },
+      (err: any) => {
+        console.log(err);
+        this.isLoading = false;
+      }
+    )
+  }
+
+  goBack() {
+    if(this.page > 1) {
+      this.page--;
+      this.http.get(`http://localhost:8080/api/get-books/${this.page}`).subscribe(
+      (res: any) => {
+        console.log(res)
+        if(res.results.length != 0) {
+          this.books = res.results;
+          this.isLoading = false;
+        } else {
+          this.snack.open('Vec ste na prvoj stranici!', 'Zatvori!', {
+            duration: 5000
+          });
+          this.page++;
+        }
+      },
+      (err: any) => {
+        console.log(err);
+        this.isLoading = false;
+      }
+    )
+    } else {
+      this.snack.open('Vec ste na prvoj stranici!', 'Zatvori!', {
+        duration: 5000
+      });
+    }
   }
 
   addtoCart(id: any, kolicina: any, naslov: any) {

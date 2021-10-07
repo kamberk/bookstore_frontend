@@ -47,6 +47,7 @@ export class WrapperComponent implements OnInit {
     } else {
       this.cartItems = 0;
     }
+    this.router.navigate(['/dashboard']);
   }
 
   logout() {
