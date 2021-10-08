@@ -34,6 +34,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { ConfDialogComponent } from './components/conf-dialog/conf-dialog.component';
 import { SeeMoreComponent } from './components/see-more/see-more.component';
 import { CartComponent } from './components/cart/cart.component';
+import {MatTabsModule} from '@angular/material/tabs';
 
 const routes: Routes = [];
 
@@ -78,6 +79,7 @@ const routes: Routes = [];
     MatInputModule,
     MatStepperModule,
     MatDialogModule,
+    MatTabsModule,
   ]
 })
 export class DashboardModule { }

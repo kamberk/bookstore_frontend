@@ -18,6 +18,7 @@ export class DashboardComponent implements OnInit {
   token = localStorage.getItem('token');
   books: any;
   page = 1;
+  knjigeOsnovna: any;
 
   constructor(
     private http: HttpClient,
@@ -30,10 +31,22 @@ export class DashboardComponent implements OnInit {
   ngOnInit(): void {
     this.isLoading = true;
     this.user = JSON.parse(localStorage?.getItem('profile') || '{}');
+    this.http.get('http://localhost:8080/api/get-by-class/osnovna').subscribe(
+      (res: any) => {
+        console.log(res.docs);
+        this.knjigeOsnovna = res.docs;
+        console.log(this.knjigeOsnovna);
+      },
+      (err: any) => {
+        console.log(err);
+      }
+    )
+
     this.http.get(`http://localhost:8080/api/get-books/${this.page}`).subscribe(
       (res: any) => {
         console.log(res)
         this.books = res.results;
+        console.log(this.books)
         this.isLoading = false;
       },
       (err: any) => {
@@ -41,6 +54,7 @@ export class DashboardComponent implements OnInit {
         this.isLoading = false;
       }
     )
+    
   }
 
   preusmeri(id: any) {
