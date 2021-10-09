@@ -35,6 +35,10 @@ import { ConfDialogComponent } from './components/conf-dialog/conf-dialog.compon
 import { SeeMoreComponent } from './components/see-more/see-more.component';
 import { CartComponent } from './components/cart/cart.component';
 import {MatTabsModule} from '@angular/material/tabs';
+import { SearchComponent } from './components/search/search.component';
+import {MatTooltipModule} from '@angular/material/tooltip';
+import {MatGridListModule} from '@angular/material/grid-list';
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
 
 const routes: Routes = [];
 
@@ -53,6 +57,7 @@ const routes: Routes = [];
     ConfDialogComponent,
     SeeMoreComponent,
     CartComponent,
+    SearchComponent,
   ],
   imports: [
     CommonModule,
@@ -80,6 +85,9 @@ const routes: Routes = [];
     MatStepperModule,
     MatDialogModule,
     MatTabsModule,
+    MatTooltipModule,
+    MatGridListModule,
+    Ng2SearchPipeModule
   ]
 })
 export class DashboardModule { }

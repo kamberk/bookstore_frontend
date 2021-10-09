@@ -53,6 +53,14 @@
             <mat-icon style="margin-right: 10px;" mat-list-icon >menu_book</mat-icon>
             <h1>BookStore</h1>
             <div fxFlex fxLayoutAlign="flex-end center">
+                <button mat-icon-button
+                matTooltip="Pretrazi knjige"
+                matTooltipClass="example-tooltip-red"
+                class="example-button"routerLink="/search">
+                    <mat-icon>
+                        manage_search
+                    </mat-icon>
+                </button>
                 <button mat-icon-button [matMenuTriggerFor]="cart" >
                     <mat-icon matBadge="{{cartItems?.length || 0}}" matBadgeSize="medium" matBadgePosition="after" matBadgeColor="accent">shopping_cart</mat-icon>
                 </button>

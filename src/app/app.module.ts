@@ -11,7 +11,7 @@ import { ButtonsModule, WavesModule, CardsModule } from 'angular-bootstrap-md'
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { HttpClientModule } from '@angular/common/http';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
-
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
 
 @NgModule({
   declarations: [
@@ -31,7 +31,8 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
     IconsModule,
     FlexLayoutModule,
     HttpClientModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    Ng2SearchPipeModule
   ],
   providers: [],
   bootstrap: [AppComponent]

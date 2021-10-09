@@ -32,7 +32,7 @@
                 <button mat-raised-button color="primary" class="uvecaj" (click)="uvecaj()">+</button> <br>
             </div>
             <h2>Ukupno: {{ukupno}} RSD</h2>
-            <button class="addToCart" mat-raised-button color="primary">Dodaj u korpu <mat-icon>shopping_cart</mat-icon></button>
+            <button class="addToCart" (click)="addtoCart(knjiga._id, knjiga.naslov)" mat-raised-button color="primary">Dodaj u korpu <mat-icon>shopping_cart</mat-icon></button>
         </form>
     </div>
 </div>

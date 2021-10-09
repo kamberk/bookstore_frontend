@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { throwToolbarMixedModesError } from '@angular/material/toolbar';
 import { Router } from '@angular/router';
@@ -9,7 +9,8 @@ import { CartService } from '../../cart.service';
 @Component({
   selector: 'app-wrapper',
   templateUrl: './wrapper.component.html',
-  styleUrls: ['./wrapper.component.scss']
+  styleUrls: ['./wrapper.component.scss'],
+  encapsulation: ViewEncapsulation.None,
 })
 export class WrapperComponent implements OnInit {
 
@@ -47,7 +48,7 @@ export class WrapperComponent implements OnInit {
     } else {
       this.cartItems = 0;
     }
-    this.router.navigate(['/dashboard']);
+    // this.router.navigate(['/dashboard']);
   }
 
   logout() {

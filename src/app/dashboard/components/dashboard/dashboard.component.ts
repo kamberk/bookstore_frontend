@@ -18,7 +18,11 @@ export class DashboardComponent implements OnInit {
   token = localStorage.getItem('token');
   books: any;
   page = 1;
+  pageSrednja = 1;
   knjigeOsnovna: any;
+  knjigeSrednja: any;
+  predskolsko: any;
+  URL = "http://localhost:8080";
 
   constructor(
     private http: HttpClient,
@@ -31,29 +35,49 @@ export class DashboardComponent implements OnInit {
   ngOnInit(): void {
     this.isLoading = true;
     this.user = JSON.parse(localStorage?.getItem('profile') || '{}');
-    this.http.get('http://localhost:8080/api/get-by-class/osnovna').subscribe(
+    this.http.get(`${this.URL}/api/get-by-class/osnovna/${this.page}`).subscribe(
       (res: any) => {
-        console.log(res.docs);
-        this.knjigeOsnovna = res.docs;
+        console.log(res);
+        this.knjigeOsnovna = res 
         console.log(this.knjigeOsnovna);
+        this.isLoading = false;
+      },
+      (err: any) => {
+        console.log(err);
+      }
+    )
+    this.http.get(`${this.URL}/api/get-by-class/srednja/${this.page}`).subscribe(
+      (res: any) => {
+        console.log(res);
+        this.knjigeSrednja = res;
+      },
+      (err: any) => {
+        console.log(err);
+      }
+    )
+    this.http.get(`${this.URL}/api/get-by-class/predskolsko/${this.page}`).subscribe(
+      (res: any) => {
+        console.log(res);
+        this.predskolsko = res;
+        this.isLoading = false;
       },
       (err: any) => {
         console.log(err);
       }
     )
 
-    this.http.get(`http://localhost:8080/api/get-books/${this.page}`).subscribe(
-      (res: any) => {
-        console.log(res)
-        this.books = res.results;
-        console.log(this.books)
-        this.isLoading = false;
-      },
-      (err: any) => {
-        console.log(err);
-        this.isLoading = false;
-      }
-    )
+    // this.http.get(`${this.URL}/api/get-books/3`).subscribe(
+    //   (res: any) => {
+    //     console.log(res)
+    //     this.books = res.results;
+    //     console.log(this.books)
+    //     this.isLoading = false;
+    //   },
+    //   (err: any) => {
+    //     console.log(err);
+    //     this.isLoading = false;
+    //   }
+    // )
     
   }
 
@@ -61,13 +85,13 @@ export class DashboardComponent implements OnInit {
     this.router.navigate([`/see-more/${id}`])
   }
 
-  nextPage() {
+  nextPageOsnovna() {
     this.page++;
-    this.http.get(`http://localhost:8080/api/get-books/${this.page}`).subscribe(
+    this.http.get(`${this.URL}/api/get-by-class/osnovna/${this.page}`).subscribe(
       (res: any) => {
         console.log(res)
-        if(res.results.length != 0) {
-          this.books = res.results;
+        if(res.length != 0) {
+          this.knjigeOsnovna = res;
           this.isLoading = false;
         } else {
           this.snack.open('Stigli ste do poslednje stranice!', 'Zatvori!', {
@@ -83,14 +107,14 @@ export class DashboardComponent implements OnInit {
     )
   }
 
-  goBack() {
+  goBackOsnovna() {
     if(this.page > 1) {
       this.page--;
-      this.http.get(`http://localhost:8080/api/get-books/${this.page}`).subscribe(
+      this.http.get(`${this.URL}/api/get-by-class/osnovna/${this.page}`).subscribe(
       (res: any) => {
         console.log(res)
-        if(res.results.length != 0) {
-          this.books = res.results;
+        if(res.length != 0) {
+          this.knjigeOsnovna = res;
           this.isLoading = false;
         } else {
           this.snack.open('Vec ste na prvoj stranici!', 'Zatvori!', {
@@ -111,16 +135,65 @@ export class DashboardComponent implements OnInit {
     }
   }
 
-  addtoCart(id: any, kolicina: any, naslov: any) {
+  goBackSrednja() {
+    if(this.pageSrednja > 1) {
+      this.pageSrednja--;
+      this.http.get(`${this.URL}/api/get-by-class/srednja/${this.pageSrednja}`).subscribe(
+      (res: any) => {
+        console.log(res)
+        if(res.length != 0) {
+          this.knjigeSrednja = res;
+          this.isLoading = false;
+        } else {
+          this.snack.open('Vec ste na prvoj stranici!', 'Zatvori!', {
+            duration: 5000
+          });
+          this.pageSrednja++;
+        }
+      },
+      (err: any) => {
+        console.log(err);
+        this.isLoading = false;
+      }
+    )
+    } else {
+      this.snack.open('Vec ste na prvoj stranici!', 'Zatvori!', {
+        duration: 5000
+      });
+    }
+  }
 
+  nextPageSrednja() {
+    this.pageSrednja++;
+    this.http.get(`${this.URL}/api/get-by-class/srednja/${this.pageSrednja}`).subscribe(
+      (res: any) => {
+        console.log(res)
+        if(res.length != 0) {
+          this.knjigeSrednja = res;
+          this.isLoading = false;
+        } else {
+          this.snack.open('Stigli ste do poslednje stranice!', 'Zatvori!', {
+            duration: 5000
+          });
+          this.pageSrednja--;
+        }
+      },
+      (err: any) => {
+        console.log(err);
+        this.isLoading = false;
+      }
+    )
+  }
+
+  addtoCart(id: any, kolicina: any, naslov: any) {
     const token = localStorage.getItem('token');
     if(!token) {
-      this.snack.open('Ulogujte se da bi ste dodavali proizvode u korpu!', 'Close!', {
+      this.snack.open('Ulogujte se da bi ste dodavali proizvode u korpu!', 'Zatvori!', {
         duration: 5000
       });
     } else {
       this.cart.addToCart(id, kolicina, naslov);
-      this.snack.open('Uspesno dodato!', 'Close!', {
+      this.snack.open('Uspesno dodato!', 'Zatvori!', {
         duration: 5000
       });
       location.reload();

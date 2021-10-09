@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { ActivatedRoute } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { CartService } from '../../cart.service';
 
 @Component({
   selector: 'app-see-more',
@@ -20,7 +21,8 @@ export class SeeMoreComponent implements OnInit {
   constructor(
     private http: HttpClient,
     private activatedRoute: ActivatedRoute,
-    private snack: MatSnackBar
+    private snack: MatSnackBar,
+    private cart: CartService
   ) { }
 
   ngOnInit(): void {
@@ -40,6 +42,22 @@ export class SeeMoreComponent implements OnInit {
         });
       }
       )
+  }
+
+  addtoCart(id: any, naslov: any) {
+    const token = localStorage.getItem('token');
+    const kolicina = this.quantity;
+    if(!token) {
+      this.snack.open('Ulogujte se da bi ste dodavali proizvode u korpu!', 'Zatvori!', {
+        duration: 5000
+      });
+    } else {
+      this.cart.addToCart(id, kolicina, naslov);
+      this.snack.open('Uspesno dodato!', 'Zatvori!', {
+        duration: 5000
+      });
+      location.reload();
+    }
   }
 
   uvecaj() {
