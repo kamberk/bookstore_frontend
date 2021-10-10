@@ -39,6 +39,8 @@ import { SearchComponent } from './components/search/search.component';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatGridListModule} from '@angular/material/grid-list';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
+import { AllBooksComponent } from './components/all-books/all-books.component';
+import {MatSelectModule} from '@angular/material/select';
 
 const routes: Routes = [];
 
@@ -58,6 +60,7 @@ const routes: Routes = [];
     SeeMoreComponent,
     CartComponent,
     SearchComponent,
+    AllBooksComponent,
   ],
   imports: [
     CommonModule,
@@ -87,7 +90,8 @@ const routes: Routes = [];
     MatTabsModule,
     MatTooltipModule,
     MatGridListModule,
-    Ng2SearchPipeModule
+    Ng2SearchPipeModule,
+    MatTabsModule
   ]
 })
 export class DashboardModule { }

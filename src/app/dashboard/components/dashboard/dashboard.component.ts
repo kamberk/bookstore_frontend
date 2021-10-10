@@ -35,7 +35,7 @@ export class DashboardComponent implements OnInit {
   ngOnInit(): void {
     this.isLoading = true;
     this.user = JSON.parse(localStorage?.getItem('profile') || '{}');
-    this.http.get(`${this.URL}/api/get-by-class/osnovna/${this.page}`).subscribe(
+    this.http.get(`${this.URL}/api/get-by-school/osnovna/${this.page}`).subscribe(
       (res: any) => {
         console.log(res);
         this.knjigeOsnovna = res 
@@ -46,7 +46,7 @@ export class DashboardComponent implements OnInit {
         console.log(err);
       }
     )
-    this.http.get(`${this.URL}/api/get-by-class/srednja/${this.page}`).subscribe(
+    this.http.get(`${this.URL}/api/get-by-school/srednja/${this.page}`).subscribe(
       (res: any) => {
         console.log(res);
         this.knjigeSrednja = res;
@@ -55,7 +55,7 @@ export class DashboardComponent implements OnInit {
         console.log(err);
       }
     )
-    this.http.get(`${this.URL}/api/get-by-class/predskolsko/${this.page}`).subscribe(
+    this.http.get(`${this.URL}/api/get-by-school/predskolsko/${this.page}`).subscribe(
       (res: any) => {
         console.log(res);
         this.predskolsko = res;
@@ -87,7 +87,7 @@ export class DashboardComponent implements OnInit {
 
   nextPageOsnovna() {
     this.page++;
-    this.http.get(`${this.URL}/api/get-by-class/osnovna/${this.page}`).subscribe(
+    this.http.get(`${this.URL}/api/get-by-school/osnovna/${this.page}`).subscribe(
       (res: any) => {
         console.log(res)
         if(res.length != 0) {
@@ -110,7 +110,7 @@ export class DashboardComponent implements OnInit {
   goBackOsnovna() {
     if(this.page > 1) {
       this.page--;
-      this.http.get(`${this.URL}/api/get-by-class/osnovna/${this.page}`).subscribe(
+      this.http.get(`${this.URL}/api/get-by-school/osnovna/${this.page}`).subscribe(
       (res: any) => {
         console.log(res)
         if(res.length != 0) {
@@ -138,7 +138,7 @@ export class DashboardComponent implements OnInit {
   goBackSrednja() {
     if(this.pageSrednja > 1) {
       this.pageSrednja--;
-      this.http.get(`${this.URL}/api/get-by-class/srednja/${this.pageSrednja}`).subscribe(
+      this.http.get(`${this.URL}/api/get-by-school/srednja/${this.pageSrednja}`).subscribe(
       (res: any) => {
         console.log(res)
         if(res.length != 0) {
@@ -165,7 +165,7 @@ export class DashboardComponent implements OnInit {
 
   nextPageSrednja() {
     this.pageSrednja++;
-    this.http.get(`${this.URL}/api/get-by-class/srednja/${this.pageSrednja}`).subscribe(
+    this.http.get(`${this.URL}/api/get-by-school/srednja/${this.pageSrednja}`).subscribe(
       (res: any) => {
         console.log(res)
         if(res.length != 0) {

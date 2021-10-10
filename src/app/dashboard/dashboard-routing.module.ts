@@ -12,6 +12,7 @@ import { SeeMoreComponent } from './components/see-more/see-more.component';
 import { SignupComponent } from './components/signup/signup.component';
 import { UserComponent } from './components/user/user.component';
 import { WrapperComponent } from './components/wrapper/wrapper.component';
+import { AllBooksComponent } from './components/all-books/all-books.component';
 
 const routes: Routes = [
     {
@@ -61,6 +62,10 @@ const routes: Routes = [
             {
                 path: 'search',
                 component: SearchComponent
+            },
+            {
+                path: 'all-books',
+                component: AllBooksComponent
             }
         ]
     },

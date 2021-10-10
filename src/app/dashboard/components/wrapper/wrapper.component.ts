@@ -30,6 +30,7 @@ export class WrapperComponent implements OnInit {
   ngOnInit(): void {
     // this.router.navigate(['/dashboard']);
     const token = localStorage.getItem('token');
+    console.log(this.user);
     if(token) {
       this.cart.getCartItems().subscribe(
         (res: any) => {
