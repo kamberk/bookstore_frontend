@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
 import { BehaviorSubject } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -11,16 +12,20 @@ export class AuthService {
 
   constructor(
     private cookie: CookieService,
+    private router: Router
   ) { }
 
     public authenticate(token: string) {
       this.cookie.set('token', token);
       this.authenticated.next(true);
+      location.reload();
+      
     }
 
     public deauthenticate(){
       this.cookie.delete('token');
       this.authenticated.next(false);
+      location.reload();
     }
 
 }

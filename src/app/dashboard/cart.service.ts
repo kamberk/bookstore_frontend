@@ -6,7 +6,6 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 })
 export class CartService {
 
-  cart = ["Test 1", "Test 2", "Test 3"];
   token = localStorage.getItem('token');
   headers = new HttpHeaders()
   .set('x-access-token', `${this.token}`);

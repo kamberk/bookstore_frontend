@@ -32,7 +32,13 @@ export class LoginComponent implements OnInit {
     this.loginForm = this.formBuilder.group({
       email: new FormControl('', [Validators.required]),
       password: new FormControl('', [Validators.required])
-    });  
+    }); 
+    if(localStorage.getItem('token') && localStorage.getItem('foo')) {
+      this.router.navigate(['/dashboard']);
+      localStorage.removeItem('foo')
+    } else {
+      localStorage.setItem('foo', 'no reload');
+    }
   }
 
   onSubmit() {

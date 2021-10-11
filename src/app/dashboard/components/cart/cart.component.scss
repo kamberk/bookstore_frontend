@@ -1,0 +1,40 @@
+button {
+    padding: 1rem;
+    font-size: 2rem;
+}
+
+@media (max-width: 600px) {
+    .mobile-hide {
+        display: none;
+    }
+
+    .one {
+        // margin: auto;
+        float: left;
+    }
+
+    .two {
+        margin-top: 2rem;
+    }
+
+    .three {
+        margin: auto;
+        margin-top: 2rem;
+    }
+}
+
+.one {
+    margin-right: 2rem;
+}
+
+.three {
+    margin-left: 2rem;
+}
+
+.knjige {
+    align-items: center;
+    text-align: center;
+    margin:auto;
+    justify-content: center;
+    width: 100%;
+}

@@ -31,7 +31,7 @@ export class WrapperComponent implements OnInit {
     // this.router.navigate(['/dashboard']);
     const token = localStorage.getItem('token');
     console.log(this.user);
-    if(token) {
+    if(this.auth.authenticated) {
       this.cart.getCartItems().subscribe(
         (res: any) => {
           // console.log(res)
@@ -43,7 +43,12 @@ export class WrapperComponent implements OnInit {
           }
         },
         (err: any) => {
+          this.snack.open("Molimo ulogujte se!", 'Zatvori!', {
+            duration: 5000
+          });
           console.log(err.error);
+          localStorage.clear();
+          this.router.navigate(['/dashboard']);
         }
       )
     } else {
