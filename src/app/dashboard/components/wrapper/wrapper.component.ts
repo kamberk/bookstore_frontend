@@ -48,7 +48,6 @@ export class WrapperComponent implements OnInit {
           });
           console.log(err.error);
           localStorage.clear();
-          this.router.navigate(['/dashboard']);
         }
       )
     } else {
@@ -62,6 +61,7 @@ export class WrapperComponent implements OnInit {
     localStorage.removeItem('profile');
     this.auth.deauthenticate();
     this.router.navigate(['/login']);
+    location.reload();
   }
 
   isprazni() {

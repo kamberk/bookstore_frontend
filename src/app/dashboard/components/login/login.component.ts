@@ -55,7 +55,7 @@ export class LoginComponent implements OnInit {
           localStorage.setItem('token', res.token);
           this.cookie.set('token', res.token);
           this.auth.authenticate(res.token);
-          this.router.navigate(['/dashboard']);
+          location.reload();
           this.isLoading = false;
         },
         (err: any) => {

@@ -41,6 +41,8 @@ import {MatGridListModule} from '@angular/material/grid-list';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { AllBooksComponent } from './components/all-books/all-books.component';
 import {MatSelectModule} from '@angular/material/select';
+import { PurchaseComponent } from './components/purchase/purchase.component';
+import { PurchaseTwoComponent } from './components/purchase-two/purchase-two.component';
 
 const routes: Routes = [];
 
@@ -61,6 +63,8 @@ const routes: Routes = [];
     CartComponent,
     SearchComponent,
     AllBooksComponent,
+    PurchaseComponent,
+    PurchaseTwoComponent,
   ],
   imports: [
     CommonModule,

@@ -13,6 +13,8 @@ import { SignupComponent } from './components/signup/signup.component';
 import { UserComponent } from './components/user/user.component';
 import { WrapperComponent } from './components/wrapper/wrapper.component';
 import { AllBooksComponent } from './components/all-books/all-books.component';
+import { PurchaseComponent } from './components/purchase/purchase.component';
+import { PurchaseTwoComponent } from './components/purchase-two/purchase-two.component';
 
 const routes: Routes = [
     {
@@ -66,6 +68,14 @@ const routes: Routes = [
             {
                 path: 'all-books',
                 component: AllBooksComponent
+            },
+            {
+                path: 'purchase',
+                component: PurchaseComponent
+            },
+            {
+                path: 'payment-method/:way',
+                component: PurchaseTwoComponent
             }
         ]
     },

@@ -18,14 +18,12 @@ export class AuthService {
     public authenticate(token: string) {
       this.cookie.set('token', token);
       this.authenticated.next(true);
-      location.reload();
       
     }
 
     public deauthenticate(){
       this.cookie.delete('token');
       this.authenticated.next(false);
-      location.reload();
     }
 
 }

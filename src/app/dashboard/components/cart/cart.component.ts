@@ -13,6 +13,9 @@ export class CartComponent implements OnInit {
 
   items: any;
   isLoading = false;
+  quantity = 1;
+  ukupno: any;
+  total: number = 0;
   books: any;
   URL = "http://localhost:8080";
 
@@ -24,10 +27,16 @@ export class CartComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    if(!localStorage.getItem('profile')) {
+      this.router.navigate(['/dashboard']);
+    }
     this.isLoading = true;
     this.cart.getCartItems().subscribe(
       (res: any) => {
         this.items = res;
+        for(let i = 0; i<res.length; i++) {
+          this.total = this.total + parseInt(res[i].cena);
+        }
       }, 
       (err: any) => {
         console.log(err)
@@ -78,7 +87,7 @@ export class CartComponent implements OnInit {
     )
   }
 
-  addtoCart(id: any, kolicina: any, naslov: any) {
+  addtoCartSugested(id: any, kolicina: any, naslov: any) {
     const token = localStorage.getItem('token');
     if(!token) {
       this.snack.open('Ulogujte se da bi ste dodavali proizvode u korpu!', 'Zatvori!', {
@@ -95,6 +104,38 @@ export class CartComponent implements OnInit {
 
   preusmeri(id: any) {
     this.router.navigate([`/see-more/${id}`])
+  }
+
+  addtoCart(id: any, naslov: any) {
+    const token = localStorage.getItem('token');
+    const kolicina = this.quantity;
+    if(!token) {
+      this.snack.open('Ulogujte se da bi ste dodavali proizvode u korpu!', 'Zatvori!', {
+        duration: 5000
+      });
+    } else {
+      this.cart.addToCart(id, kolicina, naslov);
+      this.snack.open('Uspesno dodato!', 'Zatvori!', {
+        duration: 5000
+      });
+      location.reload();
+    }
+  }
+
+  uvecaj(i: any) {
+    if(this.quantity < this.books[i].kolicina) {
+      this.quantity++;
+      this.ukupno = this.books[i].cena * this.quantity;
+      // console.log(this.books[i]);
+    }
+  }
+
+  umanji(i: any) {
+    if(this.quantity >= 2) {
+      this.quantity--;
+      this.ukupno = this.books[i].cena * this.quantity;
+      // console.log(this.books[i]);
+    }
   }
 
 }

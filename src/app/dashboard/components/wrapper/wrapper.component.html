@@ -96,6 +96,7 @@
                     </mat-icon>
                 </button>
                 <button mat-icon-button 
+                *ngIf="(auth.authenticated | async) == true"
                 matTooltip="Kartica"
                 matTooltipClass="example-tooltip-red"
                 [matMenuTriggerFor]="cart" >

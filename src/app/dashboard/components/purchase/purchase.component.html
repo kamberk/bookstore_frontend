@@ -1,0 +1,87 @@
+<div style="width: 80%; margin-top: 2rem; text-align: center; margin-left: auto; margin-right: auto; color: white;">
+    <h1 style="margin: auto;">Informacije za dostavu: <span style="margin-left: 10px;" class="glyphicon glyphicon-envelope"></span></h1>
+</div>
+<mat-divider style="margin-top: 3rem; margin-bottom: 5px; width: 80%; margin-left: auto; margin-right: auto;"></mat-divider>
+<div *ngIf="isLoading">
+    <app-spiner></app-spiner>
+</div> 
+<mat-stepper linear orientation="vertical" #stepper style="width: 80%; margin: auto;" *ngIf="!isLoading">
+    <mat-step [stepControl]="firstFormGroup">
+      <form [formGroup]="firstFormGroup">
+        <ng-template matStepLabel>Je li vas email ispravan?</ng-template>
+        <mat-form-field appearance="fill" style="width: 80%;" [style.fontSize.px]=14>
+          <mat-label>Email</mat-label>
+          <input matInput formControlName="firstCtrl" placeholder="Last name, First name" required>
+        </mat-form-field>
+        <div>
+          <button mat-raised-button color="accent" matStepperNext>Dalje</button>
+        </div>
+      </form>
+    </mat-step>
+    <mat-step [stepControl]="secondFormGroup">
+      <form [formGroup]="secondFormGroup">
+        <ng-template matStepLabel>Ulica i kucni broj:</ng-template>
+        <mat-form-field appearance="fill" style="width: 80%;" [style.fontSize.px]=14>
+          <mat-label>Ulica i kucni broj:</mat-label>
+          <input matInput formControlName="secondCtrl" placeholder="Street and house number"
+                 required>
+        </mat-form-field>
+        <div>
+          <button mat-raised-button color="accent" matStepperNext>Dalje</button>
+        </div>
+      </form>
+    </mat-step>
+    <mat-step [stepControl]="thirdFormGroup">
+        <form [formGroup]="thirdFormGroup">
+          <ng-template matStepLabel>Grad i Drzava:</ng-template>
+          <mat-form-field appearance="fill" style="width: 80%;" [style.fontSize.px]=14>
+            <mat-label>Grad/Drzava:</mat-label>
+            <input matInput formControlName="thirdCtrl" placeholder="Municipality / Place"
+                   required>
+          </mat-form-field>
+          <div>
+            <button mat-raised-button color="warn" matStepperPrevious>Nazad</button>
+            <button mat-raised-button color="accent" matStepperNext>Dalje</button>
+          </div>
+        </form>
+      </mat-step>
+      <mat-step [stepControl]="fourthFormGroup">
+        <form [formGroup]="fourthFormGroup">
+          <ng-template matStepLabel>Postanski kod:</ng-template>
+          <mat-form-field appearance="fill" style="width: 80%;" [style.fontSize.px]=14>
+            <mat-label>Zip Code:</mat-label>
+            <input matInput formControlName="fourthCtrl" placeholder="Zip Code" 
+                   required>
+          </mat-form-field>
+          <div>
+            <button mat-raised-button color="warn" matStepperPrevious>Nazad</button>
+            <button mat-raised-button color="accent" matStepperNext>Dalje</button>
+          </div>
+        </form>
+      </mat-step>
+      <mat-step [stepControl]="fifthFormGroup">
+        <form [formGroup]="fifthFormGroup">
+          <ng-template matStepLabel>Nacin placanja:</ng-template>
+          <mat-form-field appearance="fill" style="width: 80%;" [style.fontSize.px]=14>
+            <mat-label>Odaberite nacin placanja:</mat-label>
+            <select matNativeControl (change)="select($event)">
+                <option value="">Molimo vas odaberite opciju</option>
+                <option *ngFor="let option of naciniPlacanja" [value]="option.value"
+                        [selected]="selectedWay === option.value">{{ option.viewValue }}</option>
+              </select>
+          </mat-form-field>
+          <div>
+            <button mat-raised-button color="warn" matStepperPrevious>Nazad</button>
+            <button mat-raised-button color="accent" [disabled]="!selected" matStepperNext>Dalje</button>
+          </div>
+        </form>
+      </mat-step>
+    <mat-step>
+      <ng-template matStepLabel>Sacuvaj</ng-template>
+      <h3 style="color: white;">Sacuvajte informacije za dostavu!</h3>
+      <div>
+        <button mat-raised-button color="warn" matStepperPrevious>Nazad</button>
+        <button mat-raised-button color="accent" (click)="onSubmit()">Sacuvaj</button>
+      </div>
+    </mat-step>
+  </mat-stepper>

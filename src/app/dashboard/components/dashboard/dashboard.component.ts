@@ -64,21 +64,7 @@ export class DashboardComponent implements OnInit {
       (err: any) => {
         console.log(err);
       }
-    )
-
-    // this.http.get(`${this.URL}/api/get-books/3`).subscribe(
-    //   (res: any) => {
-    //     console.log(res)
-    //     this.books = res.results;
-    //     console.log(this.books)
-    //     this.isLoading = false;
-    //   },
-    //   (err: any) => {
-    //     console.log(err);
-    //     this.isLoading = false;
-    //   }
-    // )
-    
+    )    
   }
 
   preusmeri(id: any) {
