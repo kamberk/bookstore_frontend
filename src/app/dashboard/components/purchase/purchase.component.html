@@ -60,21 +60,18 @@
         </form>
       </mat-step>
       <mat-step [stepControl]="fifthFormGroup">
-        <form [formGroup]="fifthFormGroup">
           <ng-template matStepLabel>Nacin placanja:</ng-template>
           <mat-form-field appearance="fill" style="width: 80%;" [style.fontSize.px]=14>
             <mat-label>Odaberite nacin placanja:</mat-label>
             <select matNativeControl (change)="select($event)">
-                <option value="">Molimo vas odaberite opciju</option>
                 <option *ngFor="let option of naciniPlacanja" [value]="option.value"
                         [selected]="selectedWay === option.value">{{ option.viewValue }}</option>
               </select>
           </mat-form-field>
           <div>
             <button mat-raised-button color="warn" matStepperPrevious>Nazad</button>
-            <button mat-raised-button color="accent" [disabled]="!selected" matStepperNext>Dalje</button>
+            <button mat-raised-button color="accent" matStepperNext>Dalje</button>
           </div>
-        </form>
       </mat-step>
     <mat-step>
       <ng-template matStepLabel>Sacuvaj</ng-template>

@@ -138,4 +138,9 @@ export class CartComponent implements OnInit {
     }
   }
 
+  pay() {
+    this.cart.createOrder(this.items);
+    this.router.navigate([`/purchase/${this.total}`]);
+  }
+
 }

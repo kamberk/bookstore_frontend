@@ -42,7 +42,7 @@
     </div>
   </div>
   <div class="col-5" style="margin: auto; text-align: center; margin-top: 2rem; padding: 1rem;" *ngIf="!isLoading">
-    <button class="one" mat-raised-button color="primary" routerLink="/purchase">
+    <button class="one" mat-raised-button color="primary" (click)="pay()">
         Narucite
         <mat-icon>shopping_cart</mat-icon>
     </button>

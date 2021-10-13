@@ -70,11 +70,11 @@ const routes: Routes = [
                 component: AllBooksComponent
             },
             {
-                path: 'purchase',
+                path: 'purchase/:total',
                 component: PurchaseComponent
             },
             {
-                path: 'payment-method/:way',
+                path: 'payment-method/:way/:total',
                 component: PurchaseTwoComponent
             }
         ]

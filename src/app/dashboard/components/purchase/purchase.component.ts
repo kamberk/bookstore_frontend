@@ -3,8 +3,9 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { AuthService } from '../../auth.service';
+import { CartService } from '../../cart.service';
 
 
 interface NacinPlacanja {
@@ -25,11 +26,13 @@ export class PurchaseComponent implements OnInit {
     {value: 'pouzecem', viewValue: 'Placanje pouzecem'}
   ];
 
-  selectedWay = '';
+  selectedWay = 'kartica';
   errMsg: any;
   selected: Boolean = false;
   isLoading = false;
   message: any;
+  total: number = 0;
+  ordered: any;
   firstFormGroup!: FormGroup;
   secondFormGroup!: FormGroup;
   thirdFormGroup!: FormGroup;
@@ -47,10 +50,16 @@ export class PurchaseComponent implements OnInit {
     private snack: MatSnackBar,
     private dialog: MatDialog,
     private router: Router,
-    private auth: AuthService
+    private auth: AuthService,
+    private activatedRoute: ActivatedRoute,
+    private cart: CartService
   ) { }
 
   ngOnInit(): void {
+    this.ordered = this.cart.getOrderedItems();
+    console.log(this.ordered);
+    
+    this.total = this.activatedRoute.snapshot.params.total;
     if(!localStorage.getItem('profile')) {
       this.router.navigate(['/dashboard']);
     } else {
@@ -75,11 +84,6 @@ export class PurchaseComponent implements OnInit {
 
   select(event: Event) {
     this.selectedWay = (event.target as HTMLSelectElement).value;
-    if(this.selectedWay === '') {
-      this.errMsg = "Molimo odaberite nacin placanja"
-    } else {
-      this.selected = true;
-    }
   }
 
   onSubmit() {
@@ -100,7 +104,8 @@ export class PurchaseComponent implements OnInit {
         this.snack.open('Informacije uspesno sacuvane!', 'Close!', {
           duration: 5000
         });
-        this.router.navigate([`/payment-method/${this.selectedWay}`]);
+          this.router.navigate([`/payment-method/${this.selectedWay}/${this.total}`]);
+        
       },
       (err: any) => {
         console.log(err)

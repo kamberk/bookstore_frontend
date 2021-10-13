@@ -8,6 +8,7 @@ export class CartService {
 
   token = localStorage.getItem('token');
   items: any;
+  orderedBooks: any;
   headers = new HttpHeaders()
   .set('x-access-token', `${this.token}`);
 
@@ -34,6 +35,14 @@ export class CartService {
 
   public clearCart() {
     return this.http.get('http://localhost:8080/cart/clear', {'headers': this.headers});
+  }
+
+  public createOrder(books: any) {
+    this.orderedBooks = books;
+  }
+
+  public getOrderedItems() {
+    return this.orderedBooks;
   }
 
   public removeOne(id: any) {
