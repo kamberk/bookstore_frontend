@@ -3,6 +3,7 @@
 </div>  
 <div class="container" *ngIf="!isLoading">
     <h2 class="text-center mb-5" style="margin-top: 2rem;">Kontaktirajte nas:</h2>
+    <hr class="featurette-divider">
     <div class="row">
     <div class="col-md-6 offset-md-3">
     <form [formGroup]="FormData" (ngSubmit)="onSubmit(FormData.value)"><div class="form-group">
@@ -27,3 +28,4 @@
     </div>
     </div>
     </div>
+    <hr class="featurette-divider">

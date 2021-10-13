@@ -48,7 +48,7 @@ export class SignupComponent implements OnInit {
       (res:any) => {
         console.log(res);
         this.isLoading = false;
-        this.snack.open('Please activate your account! Check your email', 'Close!', {
+        this.snack.open('Proverite Email i aktivirajte nalog!', 'Zatvori!', {
           duration: 50000
         })
       },

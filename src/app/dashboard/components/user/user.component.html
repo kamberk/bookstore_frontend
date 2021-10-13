@@ -28,7 +28,7 @@
                     <div class="col-sm-3">
                       <h6 class="mb-0">Ime</h6>
                     </div>
-                    <div class="col-sm-9 text-secondary">
+                    <div class="col-sm-9" style="color: black; font-size: 1.4rem;">
                       {{user?.name}} 
                     </div>
                   </div>
@@ -37,7 +37,7 @@
                     <div class="col-sm-3">
                       <h6 class="mb-0">Prezime</h6>
                     </div>
-                    <div class="col-sm-9 text-secondary">
+                    <div class="col-sm-9" style="color: black; font-size: 1.4rem;">
                       {{user?.surname}}
                     </div>
                   </div>
@@ -46,26 +46,12 @@
                     <div class="col-sm-3">
                       <h6 class="mb-0">Email</h6>
                     </div>
-                    <div class="col-sm-9 text-secondary">
+                    <div class="col-sm-9" style="color: black; font-size: 1.4rem;">
                       {{user?.email}}
                     </div>
                   </div>
                   <hr>
                   <div class="row">
-                    <div class="col-sm-12">
-                      <!-- <a class="btn btn-info " routerLink='/edit-profile'>Edit</a> -->
-                             <button mat-raised-button
-                              color="accent"
-                              style="float: left;"
-                              routerLink="/edit"
-                            >
-                            Edit
-                            </button>
-                      <button mat-raised-button
-                              color="warn"
-                              style="float: right; margin-right: 10px;"
-                              routerLink='/restart-password'>Change password</button>
-                    </div>
                   </div>
                 </div>
               </div>
@@ -90,7 +76,7 @@
             <ng-template matStepLabel>Is your email right?</ng-template>
             <mat-form-field appearance="fill" style="width: 80%;" [style.fontSize.px]=14>
               <mat-label>Email</mat-label>
-              <input matInput formControlName="firstCtrl" placeholder="Last name, First name" required>
+              <input matInput formControlName="firstCtrl" style="color: white;" placeholder="Last name, First name" required>
             </mat-form-field>
             <div>
               <button mat-raised-button color="accent" matStepperNext>Next</button>
@@ -102,7 +88,7 @@
             <ng-template matStepLabel>Street and house number:</ng-template>
             <mat-form-field appearance="fill" style="width: 80%;" [style.fontSize.px]=14>
               <mat-label>Street and house number:</mat-label>
-              <input matInput formControlName="secondCtrl" placeholder="Street and house number"
+              <input matInput style="color: white;" formControlName="secondCtrl" placeholder="Street and house number"
                      required>
             </mat-form-field>
             <div>
@@ -115,7 +101,7 @@
               <ng-template matStepLabel>Municipality / Place:</ng-template>
               <mat-form-field appearance="fill" style="width: 80%;" [style.fontSize.px]=14>
                 <mat-label>Municipality / Place:</mat-label>
-                <input matInput formControlName="thirdCtrl" placeholder="Municipality / Place"
+                <input matInput style="color: white;" formControlName="thirdCtrl" placeholder="Municipality / Place"
                        required>
               </mat-form-field>
               <div>
@@ -129,7 +115,7 @@
               <ng-template matStepLabel>Zip Code:</ng-template>
               <mat-form-field appearance="fill" style="width: 80%;" [style.fontSize.px]=14>
                 <mat-label>Zip Code:</mat-label>
-                <input matInput formControlName="fourthCtrl" placeholder="Zip Code" 
+                <input matInput style="color: white;" formControlName="fourthCtrl" placeholder="Zip Code" 
                        required>
               </mat-form-field>
               <div>

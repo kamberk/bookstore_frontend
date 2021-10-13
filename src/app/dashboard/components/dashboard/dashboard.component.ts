@@ -14,6 +14,7 @@ import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms'
 export class DashboardComponent implements OnInit {
 
   isLoading = false;
+  loading = false;
   gridColumns = 3;
   user: any;
   token = localStorage.getItem('token');
@@ -23,12 +24,13 @@ export class DashboardComponent implements OnInit {
   pageKlet = 1;
   pageEduka = 1;
   pageLogos = 1;
+  pagePred = 1;
   Klett: any;
   Eduka: any;
   Logos: any;
+  predskolsko: any;
   knjigeOsnovna: any;
   knjigeSrednja: any;
-  predskolsko: any;
   URL = "http://localhost:8080";
   emailForm!: FormGroup;
 
@@ -102,6 +104,20 @@ export class DashboardComponent implements OnInit {
 
   onSubmit() {
     console.log(this.emailForm.value);
+    this.loading = true;
+    this.http.post(`${this.URL}/user/subscribe`, this.emailForm.value).subscribe(
+      (res: any) => {
+        console.log(res);
+        const message = res.message;
+        this.snack.open(message, 'Zatvori!', {
+          duration: 3000
+        });
+        this.loading = false;
+      },
+      (err: any) => {
+        console.log(err);
+      }
+    )
   }
 
   preusmeri(id: any) {
@@ -129,6 +145,27 @@ export class DashboardComponent implements OnInit {
     )
   }
 
+  nextPagePred() {
+    this.pagePred++;
+    this.http.get(`${this.URL}/api/get-by-school/predskolsko/${this.pagePred}`).subscribe(
+      (res: any) => {
+        if(res.length != 0) {
+          this.predskolsko = res;
+          this.isLoading = false;
+        } else {
+          this.snack.open('Stigli ste do poslednje stranice!', 'Zatvori!', {
+            duration: 5000
+          });
+          this.pagePred--;
+        }
+      },
+      (err: any) => {
+        console.log(err);
+        this.isLoading = false;
+      }
+    )
+  }
+
   goBackOsnovna() {
     if(this.page > 1) {
       this.page--;
@@ -142,6 +179,33 @@ export class DashboardComponent implements OnInit {
             duration: 5000
           });
           this.page++;
+        }
+      },
+      (err: any) => {
+        console.log(err);
+        this.isLoading = false;
+      }
+    )
+    } else {
+      this.snack.open('Vec ste na prvoj stranici!', 'Zatvori!', {
+        duration: 5000
+      });
+    }
+  }
+
+  goBackPred() {
+    if(this.pagePred > 1) {
+      this.pagePred--;
+      this.http.get(`${this.URL}/api/get-by-school/osnovna/${this.pagePred}`).subscribe(
+      (res: any) => {
+        if(res.length != 0) {
+          this.predskolsko = res;
+          this.isLoading = false;
+        } else {
+          this.snack.open('Vec ste na prvoj stranici!', 'Zatvori!', {
+            duration: 5000
+          });
+          this.pagePred++;
         }
       },
       (err: any) => {
