@@ -43,6 +43,7 @@ import { AllBooksComponent } from './components/all-books/all-books.component';
 import {MatSelectModule} from '@angular/material/select';
 import { PurchaseComponent } from './components/purchase/purchase.component';
 import { PurchaseTwoComponent } from './components/purchase-two/purchase-two.component';
+import { ThankyouComponent } from './components/thankyou/thankyou.component';
 
 const routes: Routes = [];
 
@@ -65,6 +66,7 @@ const routes: Routes = [];
     AllBooksComponent,
     PurchaseComponent,
     PurchaseTwoComponent,
+    ThankyouComponent,
   ],
   imports: [
     CommonModule,

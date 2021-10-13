@@ -13,6 +13,12 @@ interface NacinPlacanja {
   viewValue: string;
 }
 
+interface Order {
+  kolicina: number,
+  id: string,
+  naziv: string
+}
+
 
 @Component({
   selector: 'app-purchase',
@@ -27,6 +33,7 @@ export class PurchaseComponent implements OnInit {
   ];
 
   selectedWay = 'kartica';
+  naruceno: Order[] = [];
   errMsg: any;
   selected: Boolean = false;
   isLoading = false;
@@ -104,8 +111,21 @@ export class PurchaseComponent implements OnInit {
         this.snack.open('Informacije uspesno sacuvane!', 'Close!', {
           duration: 5000
         });
+        if(this.selectedWay === 'pouzecem') {
+          this.isLoading = true;
+          this.http.post(`http://localhost:8080/cart/create-order/${this.total}`, {}, {headers: this.headers}).subscribe(
+            (res: any) => {
+              console.log(res)
+              this.isLoading = false;
+              this.router.navigate([`/payment-method/${this.selectedWay}/${this.total}`]);
+            },
+            (err: any) => {
+              console.log(err)
+            }
+          )
+        } else {
           this.router.navigate([`/payment-method/${this.selectedWay}/${this.total}`]);
-        
+        }
       },
       (err: any) => {
         console.log(err)

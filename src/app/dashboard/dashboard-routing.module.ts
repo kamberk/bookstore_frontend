@@ -15,6 +15,7 @@ import { WrapperComponent } from './components/wrapper/wrapper.component';
 import { AllBooksComponent } from './components/all-books/all-books.component';
 import { PurchaseComponent } from './components/purchase/purchase.component';
 import { PurchaseTwoComponent } from './components/purchase-two/purchase-two.component';
+import { ThankyouComponent } from './components/thankyou/thankyou.component';
 
 const routes: Routes = [
     {
@@ -76,6 +77,10 @@ const routes: Routes = [
             {
                 path: 'payment-method/:way/:total',
                 component: PurchaseTwoComponent
+            },
+            {
+                path: 'thank-you',
+                component: ThankyouComponent
             }
         ]
     },
