@@ -44,6 +44,7 @@ import {MatSelectModule} from '@angular/material/select';
 import { PurchaseComponent } from './components/purchase/purchase.component';
 import { PurchaseTwoComponent } from './components/purchase-two/purchase-two.component';
 import { ThankyouComponent } from './components/thankyou/thankyou.component';
+import { ContactComponent } from './components/contact/contact.component';
 
 const routes: Routes = [];
 
@@ -67,6 +68,7 @@ const routes: Routes = [];
     PurchaseComponent,
     PurchaseTwoComponent,
     ThankyouComponent,
+    ContactComponent,
   ],
   imports: [
     CommonModule,

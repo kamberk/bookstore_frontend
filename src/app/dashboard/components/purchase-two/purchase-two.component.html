@@ -1,6 +1,9 @@
 <h1 *ngIf="kartica" style="text-align: center; margin-top: 2rem;">Izabrali ste placanje karticom</h1>
+<div *ngIf="isLoading">
+    <app-spiner></app-spiner>
+</div> 
 <div class="container-fluid" *ngIf="kartica">
-    <div class="row justify-content-center">
+    <div class="row justify-content-center" *ngIf="!isLoading">
         <div class="card my-4 p-3">
             <div class="row justify-content-center mrow">
                 <div class="col-12"> <img src="https://img.icons8.com/color/48/000000/mastercard-logo.png" width="35px" height="35px" /> <img src="https://img.icons8.com/color/48/000000/visa.png" width="35px" height="35px" /> <img src="https://img.icons8.com/color/48/000000/paypal.png" width="35px" height="35px" /> </div>
@@ -59,7 +62,7 @@
             Nazad na pocetnu
             <mat-icon>home</mat-icon>
           </button>
-          <button type="button" mat-raised-button color="secondary" routerLink='/contact'>
+          <button class="drugi" type="button" mat-raised-button color="secondary" routerLink='/contact'>
               Kontakt
               <mat-icon>contact_support</mat-icon>
           </button>

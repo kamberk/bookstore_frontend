@@ -64,7 +64,6 @@ export class PurchaseComponent implements OnInit {
 
   ngOnInit(): void {
     this.ordered = this.cart.getOrderedItems();
-    console.log(this.ordered);
     
     this.total = this.activatedRoute.snapshot.params.total;
     if(!localStorage.getItem('profile')) {
@@ -102,10 +101,8 @@ export class PurchaseComponent implements OnInit {
       opstina: [`${this.thirdFormGroup.value.thirdCtrl}`],
       zipcode: [`${this.fourthFormGroup.value.fourthCtrl}`]
     });
-    console.log(this.forma.value);
     this.http.post('http://localhost:8080/user/delivery-info', this.forma.value, {headers: this.headers}).subscribe(
       (res: any) => {
-        console.log(res)
         this.isLoading = false;
         this.message = res.message;
         this.snack.open('Informacije uspesno sacuvane!', 'Close!', {
@@ -115,7 +112,6 @@ export class PurchaseComponent implements OnInit {
           this.isLoading = true;
           this.http.post(`http://localhost:8080/cart/create-order/${this.total}`, {}, {headers: this.headers}).subscribe(
             (res: any) => {
-              console.log(res)
               this.isLoading = false;
               this.router.navigate([`/payment-method/${this.selectedWay}/${this.total}`]);
             },

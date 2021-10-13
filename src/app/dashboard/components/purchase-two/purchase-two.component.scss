@@ -93,3 +93,9 @@ h5 {
     color: #dae0e5;
     letter-spacing: 1px
 }
+
+@media(max-width: 800px) {
+    .drugi {
+        margin-top: 2rem;
+    }
+}

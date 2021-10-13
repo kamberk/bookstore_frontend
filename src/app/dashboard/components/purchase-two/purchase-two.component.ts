@@ -10,6 +10,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 })
 export class PurchaseTwoComponent implements OnInit {
 
+  isLoading = false;
   nacinPlacanja: any;
   kartica: Boolean = false;
   total: number = 0;
@@ -42,17 +43,20 @@ export class PurchaseTwoComponent implements OnInit {
   }
 
   pay() {
+    this.isLoading = true;
     this.http.post(`http://localhost:8080/cart/create-order/${this.total}`, {}, {headers: this.headers}).subscribe(
             (res: any) => {
               console.log(res)
               this.snack.open('Uspesno naruceno!', 'Zatvori!', {
                 duration: 5000
               });
+              this.isLoading = false;
               this.router.navigate([`/thank-you`]);
               location.reload();
             },
             (err: any) => {
               console.log(err)
+              this.isLoading = false;
             }
           )
   }

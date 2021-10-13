@@ -30,15 +30,11 @@ export class WrapperComponent implements OnInit {
   ngOnInit(): void {
     // this.router.navigate(['/dashboard']);
     const token = localStorage.getItem('token');
-    console.log(this.user);
     if(this.auth.authenticated) {
       this.cart.getCartItems().subscribe(
         (res: any) => {
-          // console.log(res)
           this.cartItems = res;
-          console.log(this.cartItems);
           for(let i=0; i<this.cartItems.length; i++) {
-            console.log(this.cartItems[i].cena)
             this.ukupno+= parseInt(this.cartItems[i].cena);
           }
         },
@@ -67,7 +63,6 @@ export class WrapperComponent implements OnInit {
   isprazni() {
     this.cart.clearCart().subscribe(
       (res: any) => {
-        console.log(res)
         location.reload();
       },
       (err: any) => {
@@ -79,7 +74,6 @@ export class WrapperComponent implements OnInit {
   removeOne(id: any) {
     this.cart.removeOne(id).subscribe(
       (res: any) => {
-        console.log(res);
         this.snack.open('Uklonjeno!', 'Close!', {
           duration: 5000
         });

@@ -34,3 +34,41 @@ mat-toolbar {
     margin-top: 1rem;
     margin-bottom: 1rem;
 }
+
+.tekst {
+    text-align: center;
+    width: 70%;
+    margin: auto;
+    
+    .pocetna {
+        margin-right: 2rem;
+    }
+
+    button {
+        padding: .5rem;
+        font-size: 2rem;
+    }
+}
+
+.enterEmail {
+    width: 50%;
+    text-align: center;
+    margin: auto;
+}
+
+.forma {
+
+    button {
+        padding: 1rem;
+        font-size: 2rem;
+        text-align: center;
+        margin-top: 1rem;
+        border-radius: 2rem;
+    }
+}
+
+@media (max-width: 800px) {
+    .enterEmail {
+        width: 100%;
+    }
+}

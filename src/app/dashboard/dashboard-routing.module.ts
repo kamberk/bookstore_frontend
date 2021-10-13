@@ -16,6 +16,7 @@ import { AllBooksComponent } from './components/all-books/all-books.component';
 import { PurchaseComponent } from './components/purchase/purchase.component';
 import { PurchaseTwoComponent } from './components/purchase-two/purchase-two.component';
 import { ThankyouComponent } from './components/thankyou/thankyou.component';
+import { ContactComponent } from './components/contact/contact.component';
 
 const routes: Routes = [
     {
@@ -81,6 +82,10 @@ const routes: Routes = [
             {
                 path: 'thank-you',
                 component: ThankyouComponent
+            },
+            {
+                path: 'contact',
+                component: ContactComponent
             }
         ]
     },

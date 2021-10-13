@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
+import { CartService } from '../../cart.service';
 
 interface Skola {
   value: string;
@@ -39,10 +40,13 @@ export class AllBooksComponent implements OnInit {
   selectedSchool = '';
   page = 1;
 
+  noBooks = false;
+
   constructor(
     private http: HttpClient,
     private snack: MatSnackBar,
-    private router: Router
+    private router: Router,
+    private cart: CartService
   ) { }
 
   ngOnInit(): void {
@@ -64,27 +68,30 @@ export class AllBooksComponent implements OnInit {
     if (this.selectedSchool === "") {
       this.http.get(`${this.URL}/api/get-all-books`).subscribe(
         (res: any) => {
-          // console.log(res)
           this.books = res;
           this.isLoading = false;
-          // console.log(this.books)
+          if(this.books.length === 0) {
+            this.noBooks = true;
+          }
+        },
+        (err: any) => {
+          console.log(err);
+        }
+      )
+    } else {
+      this.http.get(`${this.URL}/api/get-by-school/${(event.target as HTMLSelectElement).value}/${this.page}`).subscribe(
+        (res: any) => {
+          this.books = res 
+          if(this.books.length === 0) {
+            this.noBooks = true;
+          }
+          this.isLoading = false;
         },
         (err: any) => {
           console.log(err);
         }
       )
     }
-    this.http.get(`${this.URL}/api/get-by-school/${(event.target as HTMLSelectElement).value}/${this.page}`).subscribe(
-      (res: any) => {
-        console.log(res);
-        this.books = res 
-        console.log(this.books);
-        this.isLoading = false;
-      },
-      (err: any) => {
-        console.log(err);
-      }
-    )
   }
 
   selectClass(event: Event) {
@@ -95,6 +102,9 @@ export class AllBooksComponent implements OnInit {
       this.http.get(`${this.URL}/api/get-by-class/${this.page}/${razred}/none`).subscribe(
         (res: any) => {
           this.books = res;
+          if(this.books.length === 0) {
+            this.noBooks = true;
+          }
           this.isLoading = false;
         }, 
         (err: any) => {
@@ -105,18 +115,23 @@ export class AllBooksComponent implements OnInit {
       this.http.get(`${this.URL}/api/get-all-books`).subscribe(
         (res: any) => {
           this.books = res;
+          if(this.books.length === 0) {
+            this.noBooks = true;
+          }
           this.isLoading = false;
         },
         (err: any) => {
           console.log(err);
         }
       )
-    }
-    else {
+    } else {
       this.http.get(`${this.URL}/api/get-by-class/${this.page}/${razred}/${this.selectedSchool}`).subscribe(
         (res: any) => {
           console.log(res)
           this.books = res;
+          if(this.books.length === 0) {
+            this.noBooks = true;
+          }
           this.isLoading = false;
         },
         (err: any) => {
@@ -131,7 +146,18 @@ preusmeri(id: any) {
 }
 
 addtoCart(id: any, kolicina: any, naslov: any) {
-
+  const token = localStorage.getItem('token');
+    if(!token) {
+      this.snack.open('Ulogujte se da bi ste dodavali proizvode u korpu!', 'Zatvori!', {
+        duration: 5000
+      });
+    } else {
+      this.cart.addToCart(id, kolicina, naslov);
+      this.snack.open('Uspesno dodato!', 'Zatvori!', {
+        duration: 5000
+      });
+      location.reload();
+    }
 }
 
 }
