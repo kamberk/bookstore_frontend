@@ -32,7 +32,7 @@ export class RestartPassComponent implements OnInit {
   onSubmit() {
     this.isLoading = true;
     console.log(this.restartForm.value.email);
-    this.http.post('http://localhost:8080/user/restart-password', this.restartForm.value).subscribe(
+    this.http.post('http://143.198.178.167:8080/user/restart-password', this.restartForm.value).subscribe(
       (res: any) => {
         console.log(res.message);
         this.message = res.message;

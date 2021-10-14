@@ -28,9 +28,8 @@ export class SeeMoreComponent implements OnInit {
   ngOnInit(): void {
     this.isLoading = true;
     this.id = this.activatedRoute.snapshot.params.id;
-    this.http.get('http://localhost:8080/api/get-by-id/' + this.id, this.id).subscribe(
+    this.http.get('http://143.198.178.167:8080/api/get-by-id/' + this.id, this.id).subscribe(
       (res: any) => {
-        // console.log(res);
         this.knjiga = res;
         this.isLoading = false;
         this.ukupno = res.cena;

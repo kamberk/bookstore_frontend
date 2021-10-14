@@ -17,7 +17,7 @@ export class CartComponent implements OnInit {
   ukupno: any;
   total: number = 0;
   books: any;
-  URL = "http://localhost:8080";
+  URL = "http://143.198.178.167:8080";
 
   constructor(
     public cart: CartService,

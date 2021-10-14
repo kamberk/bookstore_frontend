@@ -30,7 +30,7 @@ export class ContactComponent implements OnInit {
   onSubmit(FormData: any) {
     this.isLoading = true;
     console.log(FormData);
-    this.http.post('http://localhost:8080/user/contact', FormData).subscribe(
+    this.http.post('http://143.198.178.167:8080/user/contact', FormData).subscribe(
       (res: any) => {
         console.log(res);
         this.snack.open('Poslali ste poruku!', 'Zatvori!', {

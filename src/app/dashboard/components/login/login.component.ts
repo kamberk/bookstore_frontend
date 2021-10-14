@@ -49,11 +49,11 @@ export class LoginComponent implements OnInit {
       });
     } else {
       this.isLoading = true;
-      this.http.post('http://localhost:8080/user/signin', this.loginForm.value).subscribe(
+      this.http.post('http://143.198.178.167:8080/user/signin', this.loginForm.value).subscribe(
         (res: any) => {
           localStorage.setItem('profile', JSON.stringify(res.result));
           localStorage.setItem('token', res.token);
-          this.cookie.set('token', res.token);
+          // this.cookie.set('token', res.token);
           this.auth.authenticate(res.token);
           location.reload();
           this.isLoading = false;

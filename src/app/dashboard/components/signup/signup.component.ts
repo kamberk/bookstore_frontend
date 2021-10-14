@@ -44,7 +44,7 @@ export class SignupComponent implements OnInit {
       });
     } else {
       this.isLoading = true;
-      this.http.post('http://localhost:8080/user/signup', this.signupForm.value).subscribe(
+      this.http.post('http://143.198.178.167:8080/user/signup', this.signupForm.value).subscribe(
       (res:any) => {
         console.log(res);
         this.isLoading = false;

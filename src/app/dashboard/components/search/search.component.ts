@@ -14,7 +14,7 @@ export class SearchComponent implements OnInit {
   
   searchTerm!: string;
   term!: string;
-  URL = "http://localhost:8080";
+  URL = "http://143.198.178.167:8080";
   books: any;
   page = 1;
   random: any;
@@ -29,9 +29,7 @@ export class SearchComponent implements OnInit {
   ngOnInit(): void {
     this.http.get(`${this.URL}/api/get-all-books`).subscribe(
       (res: any) => {
-        // console.log(res)
         this.books = res;
-        // console.log(this.books)
       },
       (err: any) => {
         console.log(err);

@@ -32,7 +32,7 @@ export class ActivateAccountComponent implements OnInit {
   
   activate() {
     this.isLoading = true;
-    this.http.get(`http://localhost:8080/user/activate-acc/${this.token}`).subscribe(
+    this.http.get(`http://143.198.178.167:8080/user/activate-acc/${this.token}`).subscribe(
       (res: any) => {
         console.log(res)
         this.isLoading = false;

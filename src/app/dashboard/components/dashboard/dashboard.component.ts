@@ -31,7 +31,7 @@ export class DashboardComponent implements OnInit {
   predskolsko: any;
   knjigeOsnovna: any;
   knjigeSrednja: any;
-  URL = "http://localhost:8080";
+  URL = "http://143.198.178.167:8080";
   emailForm!: FormGroup;
 
   constructor(

@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { throwToolbarMixedModesError } from '@angular/material/toolbar';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { AuthService } from '../../auth.service';
 import { CartService } from '../../cart.service';
 
@@ -24,11 +24,11 @@ export class WrapperComponent implements OnInit {
     private router: Router,
     public auth: AuthService,
     public cart: CartService,
-    private snack: MatSnackBar
+    private snack: MatSnackBar,
+    private activatedRoute: ActivatedRoute
   ) { }
 
   ngOnInit(): void {
-    // this.router.navigate(['/dashboard']);
     const token = localStorage.getItem('token');
     if(this.auth.authenticated) {
       this.cart.getCartItems().subscribe(

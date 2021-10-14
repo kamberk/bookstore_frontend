@@ -44,7 +44,7 @@ export class PurchaseTwoComponent implements OnInit {
 
   pay() {
     this.isLoading = true;
-    this.http.post(`http://localhost:8080/cart/create-order/${this.total}`, {}, {headers: this.headers}).subscribe(
+    this.http.post(`http://143.198.178.167:8080/cart/create-order/${this.total}`, {}, {headers: this.headers}).subscribe(
             (res: any) => {
               console.log(res)
               this.snack.open('Uspesno naruceno!', 'Zatvori!', {

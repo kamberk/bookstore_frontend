@@ -32,7 +32,7 @@ export class NewPasswordComponent implements OnInit {
   onSubmit() {
     this.isLoading = true;
     const token = this.activatedRoute.snapshot.params.token;
-    this.http.post('http://localhost:8080/user/change-password/'+token, this.newForm.value).subscribe(
+    this.http.post('http://143.198.178.167:8080/user/change-password/'+token, this.newForm.value).subscribe(
       (res: any) => {
         console.log(res);
         this.message = res.message;

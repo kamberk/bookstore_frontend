@@ -23,7 +23,7 @@ export class AllBooksComponent implements OnInit {
 
   isLoading = false;
   books: any;
-  URL = "http://localhost:8080";
+  URL = "http://143.198.178.167:8080";
 
   skola: Skola[] = [
     {value: 'osnovna', viewValue: 'Osnovna'},
@@ -52,9 +52,7 @@ export class AllBooksComponent implements OnInit {
   ngOnInit(): void {
     this.http.get(`${this.URL}/api/get-all-books`).subscribe(
       (res: any) => {
-        // console.log(res)
         this.books = res;
-        // console.log(this.books)
       },
       (err: any) => {
         console.log(err);

@@ -4,7 +4,7 @@
     <app-spiner></app-spiner>
 </div>  
 
-<div class="tabovi">
+<div class="tabovi" *ngIf="!isLoading">
   <hr class="featurette-divider">
   <h3>Odaberite skolu:</h3>
   <hr class="featurette-divider">
@@ -105,9 +105,9 @@
     </mat-tab-group>
 </div>
 
-<hr class="featurette-divider">
+<hr class="featurette-divider" *ngIf="!isLoading">
     
-<div class="tabovi">
+<div class="tabovi" *ngIf="!isLoading">
   <h3>Odaberite izdavaca:</h3>
   <hr class="featurette-divider">
     <mat-tab-group animationDuration="1000ms" mat-align-tabs="center"> 
@@ -210,7 +210,7 @@
 
 <hr class="featurette-divider">
 
-<div class="px-4 py-5 my-5 text-center centriraj">
+<div class="px-4 py-5 my-5 text-center centriraj" *ngIf="!isLoading">
   <img class="d-block mx-auto mb-4" src="../../../../assets/images/email-svgrepo-com.svg" alt="" width="72" height="57">
   <h1 class="display-5 fw-bold">е-mail Newsletter!</h1>
   <div class="tekst">
@@ -225,5 +225,5 @@
       </div>
   </div>
 </div>
-<hr class="featurette-divider">
-<h1 class="text-muted" style="margin-bottom: 0; text-align: center;">&copy; eKnjizara 2021. All rights reserved!</h1>
+<hr class="featurette-divider" *ngIf="!isLoading">
+<h1 class="text-muted" style="margin-bottom: 0; text-align: center;" *ngIf="!isLoading">&copy; eKnjizara 2021. All rights reserved!</h1>
