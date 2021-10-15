@@ -66,13 +66,15 @@ export class SearchComponent implements OnInit {
         console.log(res);
       },
       (err: any) => {
-        console.log(err);
+        console.log(err)
+      },
+      () => {
+        location.reload();
+        this.snack.open('Uspesno dodato!', 'Zatvori!', {
+          duration: 5000
+        });
       }
     );
-      this.snack.open('Uspesno dodato!', 'Zatvori!', {
-        duration: 5000
-      });
-      location.reload();
     }
   }
 

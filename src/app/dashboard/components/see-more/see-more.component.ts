@@ -62,12 +62,14 @@ export class SeeMoreComponent implements OnInit {
       },
       (err: any) => {
         console.log(err)
+      },
+      () => {
+        location.reload();
+        this.snack.open('Uspesno dodato!', 'Zatvori!', {
+          duration: 5000
+        });
       }
     );
-      this.snack.open('Uspesno dodato!', 'Zatvori!', {
-        duration: 5000
-      });
-      location.reload();
     }
   }
 

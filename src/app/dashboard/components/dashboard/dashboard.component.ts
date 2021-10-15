@@ -417,11 +417,12 @@ export class DashboardComponent implements OnInit {
 
   addtoCart(id: any, kolicina: any, naslov: any) {
     this.isLoading = true;
-    const token = localStorage.getItem('token');
-    if(!token) {
+    // const token = localStorage.getItem('token');
+    if(!this.token) {
       this.snack.open('Ulogujte se da bi ste dodavali proizvode u korpu!', 'Zatvori!', {
         duration: 5000
       });
+      location.reload();
     } else {
       // this.cart.addToCart(id, kolicina, naslov);
       this.http.post(`http://143.198.178.167:8080/cart/add-to-cart/${id}`, {'Kolicina': kolicina, 'naslov': naslov}, {'headers': this.headers}).subscribe(
@@ -431,12 +432,14 @@ export class DashboardComponent implements OnInit {
       },
       (err: any) => {
         console.log(err)
+      },
+      () => {
+        location.reload();
+        this.snack.open('Uspesno dodato!', 'Zatvori!', {
+          duration: 5000
+        });
       }
     );
-      this.snack.open('Uspesno dodato!', 'Zatvori!', {
-        duration: 5000
-      });
-      location.reload();
     }
   }
 

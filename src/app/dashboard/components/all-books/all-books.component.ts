@@ -162,12 +162,14 @@ addtoCart(id: any, kolicina: any, naslov: any) {
       },
       (err: any) => {
         console.log(err)
-      }
-    );
-      this.snack.open('Uspesno dodato!', 'Zatvori!', {
-        duration: 5000
-      });
-      location.reload();
+      },
+      () => {
+        location.reload();
+        this.snack.open('Uspesno dodato!', 'Zatvori!', {
+          duration: 5000
+        });
+      }      
+      );
     }
 }
 

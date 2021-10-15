@@ -52,11 +52,13 @@ export class PurchaseTwoComponent implements OnInit {
               });
               this.isLoading = false;
               this.router.navigate([`/thank-you`]);
-              location.reload();
             },
             (err: any) => {
               console.log(err)
               this.isLoading = false;
+            },
+            ()=> {
+              location.reload();
             }
           )
   }

@@ -53,14 +53,16 @@ export class LoginComponent implements OnInit {
         (res: any) => {
           localStorage.setItem('profile', JSON.stringify(res.result));
           localStorage.setItem('token', res.token);
-          // this.cookie.set('token', res.token);
+          this.cookie.set('token', res.token);
           this.auth.authenticate(res.token);
-          location.reload();
           this.isLoading = false;
         },
         (err: any) => {
           this.eror = err.error.message;
           this.isLoading = false;
+        },
+        () => {
+          location.reload();
         }
         )
         }
