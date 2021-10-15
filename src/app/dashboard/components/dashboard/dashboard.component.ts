@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../auth.service';
 import { Router } from '@angular/router';
@@ -18,6 +18,8 @@ export class DashboardComponent implements OnInit {
   gridColumns = 3;
   user: any;
   token = localStorage.getItem('token');
+  headers = new HttpHeaders()
+  .set('x-access-token', `${this.token}`);
   books: any;
   page = 1;
   pageSrednja = 1;
@@ -414,13 +416,23 @@ export class DashboardComponent implements OnInit {
   }
 
   addtoCart(id: any, kolicina: any, naslov: any) {
+    this.isLoading = true;
     const token = localStorage.getItem('token');
     if(!token) {
       this.snack.open('Ulogujte se da bi ste dodavali proizvode u korpu!', 'Zatvori!', {
         duration: 5000
       });
     } else {
-      this.cart.addToCart(id, kolicina, naslov);
+      // this.cart.addToCart(id, kolicina, naslov);
+      this.http.post(`http://143.198.178.167:8080/cart/add-to-cart/${id}`, {'Kolicina': kolicina, 'naslov': naslov}, {'headers': this.headers}).subscribe(
+      (res: any) => {
+        console.log(res)
+        this.isLoading = false;
+      },
+      (err: any) => {
+        console.log(err)
+      }
+    );
       this.snack.open('Uspesno dodato!', 'Zatvori!', {
         duration: 5000
       });

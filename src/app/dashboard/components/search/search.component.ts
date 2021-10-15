@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { CartService } from '../../cart.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
@@ -18,6 +18,9 @@ export class SearchComponent implements OnInit {
   books: any;
   page = 1;
   random: any;
+  token = localStorage.getItem('token');
+  headers = new HttpHeaders()
+  .set('x-access-token', `${this.token}`);
 
   constructor(
     private http: HttpClient,
@@ -57,7 +60,15 @@ export class SearchComponent implements OnInit {
         duration: 5000
       });
     } else {
-      this.cart.addToCart(id, kolicina, naslov);
+      // this.cart.addToCart(id, kolicina, naslov);
+      this.http.post(`http://143.198.178.167:8080/cart/add-to-cart/${id}`, {'Kolicina': kolicina, 'naslov': naslov}, {'headers': this.headers}).subscribe(
+      (res: any) => {
+        console.log(res);
+      },
+      (err: any) => {
+        console.log(err);
+      }
+    );
       this.snack.open('Uspesno dodato!', 'Zatvori!', {
         duration: 5000
       });
