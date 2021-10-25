@@ -11,13 +11,15 @@ import { Router } from '@angular/router';
 })
 export class CartComponent implements OnInit {
 
+  isUser = false;
+  loadingButton = false;
   items: any;
   isLoading = false;
   quantity = 1;
   ukupno: any;
   total: number = 0;
   books: any;
-  URL = "http://143.198.178.167:8080";
+  URL = "http://localhost:8085";
   token = localStorage.getItem('token');
   headers = new HttpHeaders()
   .set('x-access-token', `${this.token}`);
@@ -91,17 +93,32 @@ export class CartComponent implements OnInit {
   }
 
   addtoCartSugested(id: any, kolicina: any, naslov: any) {
+    this.loadingButton = true;
     const token = localStorage.getItem('token');
     if(!token) {
       this.snack.open('Ulogujte se da bi ste dodavali proizvode u korpu!', 'Zatvori!', {
         duration: 5000
       });
+      this.loadingButton = false;
     } else {
-      this.cart.addToCart(id, kolicina, naslov);
-      this.snack.open('Uspesno dodato!', 'Zatvori!', {
-        duration: 5000
-      });
-      location.reload();
+      this.isUser = true;
+      this.cart.addToCart(id, kolicina, naslov).subscribe(
+        (res: any) => {
+          console.log(res)
+        },
+        (err: any) => {
+          console.log(err)
+        },
+        () => {
+          this.loadingButton = false;
+          this.snack.open('Uspesno dodato!', 'Zatvori!', {
+            duration: 5000
+          });
+          if(this.isUser) {
+            location.reload();
+          }
+        }
+      )
     }
   }
 
@@ -110,29 +127,48 @@ export class CartComponent implements OnInit {
   }
 
   addtoCart(id: any, naslov: any) {
+    this.loadingButton = true;
     const token = localStorage.getItem('token');
     const kolicina = this.quantity;
-    if(!token) {
+    if(token === null) {
       this.snack.open('Ulogujte se da bi ste dodavali proizvode u korpu!', 'Zatvori!', {
         duration: 5000
       });
+      this.loadingButton = true;
     } else {
-      // this.cart.addToCart(id, kolicina, naslov);
-      this.http.post(`http://143.198.178.167:8080/cart/add-to-cart/${id}`, {'Kolicina': kolicina, 'naslov': naslov}, {'headers': this.headers}).subscribe(
-      (res: any) => {
-        console.log(res)
-        this.isLoading = false;
-      },
-      (err: any) => {
-        console.log(err)
-      },
-      () => {
-        location.reload();
-        this.snack.open('Uspesno dodato!', 'Zatvori!', {
-          duration: 5000
-        });
-      }
-    );
+      this.isUser = true;
+      this.cart.addToCart(id, kolicina, naslov).subscribe(
+        (res: any) => {
+          console.log(res)
+        },
+        (err: any) => {
+          console.log(err)
+        },
+        () => {
+          this.snack.open('Uspesno dodato!', 'Zatvori!', {
+            duration: 3000
+          })
+          this.loadingButton = true;
+          if(this.isUser) {
+            location.reload();
+          }
+        }
+      )
+    //   this.http.post(`http://localhost:8085/cart/add-to-cart/${id}`, {'Kolicina': kolicina, 'naslov': naslov}, {'headers': this.headers}).subscribe(
+    //   (res: any) => {
+    //     console.log(res)
+    //     this.isLoading = false;
+    //   },
+    //   (err: any) => {
+    //     console.log(err)
+    //   },
+    //   () => {
+    //     location.reload();
+    //     this.snack.open('Uspesno dodato!', 'Zatvori!', {
+    //       duration: 5000
+    //     });
+    //   }
+    // );
     }
   }
 

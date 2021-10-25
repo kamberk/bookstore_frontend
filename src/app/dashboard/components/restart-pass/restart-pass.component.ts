@@ -32,13 +32,13 @@ export class RestartPassComponent implements OnInit {
   onSubmit() {
     this.isLoading = true;
     console.log(this.restartForm.value.email);
-    this.http.post('http://143.198.178.167:8080/user/restart-password', this.restartForm.value).subscribe(
+    this.http.post('http://localhost:8085/user/restart-password', this.restartForm.value).subscribe(
       (res: any) => {
         console.log(res.message);
         this.message = res.message;
         this.restartForm.reset();
         this.isLoading = false;
-        this.snack.open(this.message, "Close!", {
+        this.snack.open(this.message, "Zatvori!", {
           duration: 5000
         })
       },
@@ -47,7 +47,7 @@ export class RestartPassComponent implements OnInit {
         console.log(err.error.message);
         this.message = err.error.message;
         this.isLoading = false;
-        this.snack.open(this.message, "Close!", {
+        this.snack.open(this.message, "Zatvori!", {
           duration: 5000
         })
       }

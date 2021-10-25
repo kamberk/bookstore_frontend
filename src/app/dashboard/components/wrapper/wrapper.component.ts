@@ -29,8 +29,9 @@ export class WrapperComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.auth.checkUser();
     const token = localStorage.getItem('token');
-    if(this.auth.authenticated) {
+    if(this.auth.authenticated$) {
       this.cart.getCartItems().subscribe(
         (res: any) => {
           this.cartItems = res;

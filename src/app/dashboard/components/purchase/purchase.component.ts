@@ -14,8 +14,6 @@ interface NacinPlacanja {
 }
 
 interface Order {
-  kolicina: number,
-  id: string,
   naziv: string
 }
 
@@ -50,7 +48,8 @@ export class PurchaseComponent implements OnInit {
   user: any;
   headers: any;
   token: any;
-  
+  items: any;
+
   constructor(
     private _formBuilder: FormBuilder,
     private http: HttpClient,
@@ -63,7 +62,18 @@ export class PurchaseComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.ordered = this.cart.getOrderedItems();
+    // this.ordered = this.cart.getOrderedItems();
+    this.cart.getCartItems().subscribe(
+      (res: any) => {
+        for(let i=0; i<res.length; i++) {
+          this.naruceno.push(res[i].naziv);
+        }
+        console.log(this.naruceno);
+      },
+      (err: any) => {
+        console.log(err)
+      }
+    );
     
     this.total = this.activatedRoute.snapshot.params.total;
     if(!localStorage.getItem('profile')) {
@@ -101,7 +111,7 @@ export class PurchaseComponent implements OnInit {
       opstina: [`${this.thirdFormGroup.value.thirdCtrl}`],
       zipcode: [`${this.fourthFormGroup.value.fourthCtrl}`]
     });
-    this.http.post('http://143.198.178.167:8080/user/delivery-info', this.forma.value, {headers: this.headers}).subscribe(
+    this.http.post('http://localhost:8085/user/delivery-info', this.forma.value, {headers: this.headers}).subscribe(
       (res: any) => {
         this.isLoading = false;
         this.message = res.message;
@@ -110,7 +120,7 @@ export class PurchaseComponent implements OnInit {
         });
         if(this.selectedWay === 'pouzecem') {
           this.isLoading = true;
-          this.http.post(`http://143.198.178.167:8080/cart/create-order/${this.total}`, {}, {headers: this.headers}).subscribe(
+          this.http.post(`http://localhost:8085/cart/create-order/${this.total}`, {naruceno: this.naruceno}, {headers: this.headers}).subscribe(
             (res: any) => {
               this.isLoading = false;
               this.router.navigate([`/payment-method/${this.selectedWay}/${this.total}`]);

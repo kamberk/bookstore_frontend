@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { Router } from '@angular/router';
 
 @Injectable({
@@ -8,22 +8,32 @@ import { Router } from '@angular/router';
 })
 export class AuthService {
 
-  public authenticated = new BehaviorSubject<boolean>(this.cookie.check('token'));
+  private authen= new BehaviorSubject<boolean>(false);
+  authenticated$: Observable<boolean> = this.authen.asObservable();
 
   constructor(
     private cookie: CookieService,
     private router: Router
   ) { }
 
+    checkUser() {
+      const token = localStorage.getItem('token');
+      if(token === null) {
+        this.authen.next(false)
+      } else {
+        this.authen.next(true)
+      }
+    }
+
     public authenticate(token: string) {
       this.cookie.set('token', token);
-      this.authenticated.next(true);
-      
+      this.authen.next(true);      
+      this.router.navigate(['/dashboard']);
     }
 
     public deauthenticate(){
       this.cookie.delete('token');
-      this.authenticated.next(false);
+      this.authen.next(false);
     }
 
 }

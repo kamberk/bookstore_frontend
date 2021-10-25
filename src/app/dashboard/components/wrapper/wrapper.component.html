@@ -8,7 +8,7 @@
 
             <mat-divider></mat-divider>
 
-            <mat-list-item disabled *ngIf="(auth.authenticated | async) == true && expanded">
+            <mat-list-item disabled *ngIf="(auth.authenticated$ | async) == true && expanded">
                 <span>Hi, {{user.name}}</span>
             </mat-list-item>
 
@@ -19,7 +19,7 @@
                 matTooltipClass="example-tooltip-red"
             >
                <mat-icon mat-list-icon>home</mat-icon>
-               <span *ngIf="expanded" >Home</span>
+               <span *ngIf="expanded" >Pocetna</span>
             </mat-list-item>
 
             <mat-list-item routerLink="/info" 
@@ -42,40 +42,40 @@
             matTooltip="Profil!"
             matTooltipClass="example-tooltip-red"
             routerLink="/user" 
-            *ngIf="(auth.authenticated | async) == true"
+            *ngIf="(auth.authenticated$ | async) == true"
             >
                 <mat-icon mat-list-icon>badge</mat-icon>
-                <span *ngIf="expanded" >Profile</span>
+                <span *ngIf="expanded" >Profil</span>
             </mat-list-item>
 
             <mat-list-item 
             routerLink="/login" 
-            *ngIf="!(auth.authenticated | async) == true"
+            *ngIf="!(auth.authenticated$ | async) == true"
             matTooltip="Ulogujte se.."
             matTooltipClass="example-tooltip-red"
             >
                 <mat-icon mat-list-icon>login</mat-icon>
-                <span *ngIf="expanded" >Login</span>
+                <span *ngIf="expanded" >Ulogujte se</span>
             </mat-list-item>
 
             <mat-list-item 
             (click)="logout()" 
-            *ngIf="(auth.authenticated | async) == true"
+            *ngIf="(auth.authenticated$ | async) == true"
             matTooltip="Odjavite se!"
             matTooltipClass="example-tooltip-red"
             >
                 <mat-icon mat-list-icon>phonelink_erase</mat-icon>
-                <span *ngIf="expanded" >Logout</span>
+                <span *ngIf="expanded" >Odjavite se</span>
             </mat-list-item>
 
             <mat-list-item 
             routerLink="/register" 
-            *ngIf="!(auth.authenticated | async) == true"
+            *ngIf="!(auth.authenticated$ | async) == true"
             matTooltip="Napravite nalog"
             matTooltipClass="example-tooltip-red"
             >
                 <mat-icon mat-list-icon>app_registration</mat-icon>
-                <span *ngIf="expanded" >Register</span>
+                <span *ngIf="expanded" >Registrujte se</span>
             </mat-list-item>
         
             </mat-nav-list>
@@ -84,7 +84,7 @@
     
         <mat-toolbar>
             <mat-icon style="margin-right: 10px;" mat-list-icon >menu_book</mat-icon>
-            <h1>BookStore</h1>
+            <h1>eKnjizara</h1>
             <div fxFlex fxLayoutAlign="flex-end center">
                 <button mat-icon-button
                 matTooltip="Pretrazi knjige"
@@ -95,7 +95,7 @@
                     </mat-icon>
                 </button>
                 <button mat-icon-button 
-                *ngIf="(auth.authenticated | async) == true"
+                *ngIf="(auth.authenticated$ | async) == true"
                 matTooltip="Kartica"
                 matTooltipClass="example-tooltip-red"
                 [matMenuTriggerFor]="cart" >
@@ -135,28 +135,28 @@
                     <mat-icon>person</mat-icon>
                 </button>
                 <mat-menu #menu="matMenu">
-                    <button routerLink="/user" mat-menu-item [disabled]="!(auth.authenticated | async) == true">
+                    <button routerLink="/user" mat-menu-item [disabled]="!(auth.authenticated$ | async) == true">
                       <mat-icon>person</mat-icon>
-                      <span>Profile</span>
+                      <span>Profil</span>
                     </button>
 
-                    <button mat-menu-item routerLink="/cart" [disabled]="!(auth.authenticated | async) == true">
+                    <button mat-menu-item routerLink="/cart" [disabled]="!(auth.authenticated$ | async) == true">
                         <mat-icon>shopping_cart</mat-icon>
-                        <span>My Cart</span>
+                        <span>Moja Kartica</span>
                     </button>
 
                       <mat-divider></mat-divider>
-                    <button mat-menu-item routerLink="/login" *ngIf="!(auth.authenticated | async) == true" >
+                    <button mat-menu-item routerLink="/login" *ngIf="!(auth.authenticated$ | async) == true" >
                       <mat-icon>login</mat-icon>
-                      <span>Login</span>
+                      <span>Ulogujte se</span>
                     </button>
-                    <button mat-menu-item routerLink="/register" *ngIf="!(auth.authenticated | async) == true">
+                    <button mat-menu-item routerLink="/register" *ngIf="!(auth.authenticated$ | async) == true">
                       <mat-icon>app_registration</mat-icon>
-                      <span>Register</span>
+                      <span>Registrujte se</span>
                     </button>
-                    <button mat-menu-item routerLink="/login" (click)="logout()" *ngIf="(auth.authenticated | async) == true">
+                    <button mat-menu-item routerLink="/login" (click)="logout()" *ngIf="(auth.authenticated$ | async) == true">
                         <mat-icon>phonelink_erase</mat-icon>
-                        <span>Logout</span>
+                        <span>Odjavite se</span>
                       </button>
                   </mat-menu>
             </div>

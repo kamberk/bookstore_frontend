@@ -42,12 +42,12 @@
     </div>
   </div>
   <div class="col-5" style="margin: auto; text-align: center; margin-top: 2rem; padding: 1rem;" *ngIf="!isLoading">
-    <button class="one" mat-raised-button color="primary" (click)="pay()">
+    <button class="one" mat-raised-button color="primary" (click)="pay()" [disabled]='total === 0'>
         Narucite
         <mat-icon>shopping_cart</mat-icon>
     </button>
-    <button class="two" (click)="clear()" mat-raised-button color="warn">
-        Clear Cart!
+    <button class="two" (click)="clear()" [disabled]='total === 0' mat-raised-button color="warn">
+        Isprazni!
         <mat-icon>backspace</mat-icon>
     </button>
     <button class="three" routerLink="/dashboard" mat-raised-button color="primary">
@@ -74,7 +74,11 @@
     </mat-card-content>
     <mat-card-actions>
       <button mat-button (click)="preusmeri(book._id)"> Detalji<mat-icon>read_more</mat-icon></button>
-      <button mat-button (click)="addtoCartSugested(book._id, 1, book.naslov)" >Dodaj u korpu <mat-icon>shopping_cart</mat-icon></button>
+      <button mat-button (click)="addtoCartSugested(book._id, 1, book.naslov)" *ngIf="!loadingButton" >Dodaj u korpu <mat-icon>shopping_cart</mat-icon></button>
+      <button mat-raised-button color="primary" *ngIf="loadingButton" disabled>Dodajemo
+        <mat-icon><mat-spinner diameter="20">
+        </mat-spinner></mat-icon>
+      </button>
     </mat-card-actions>
 </mat-card>
 </div>

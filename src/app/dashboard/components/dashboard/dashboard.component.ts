@@ -13,6 +13,7 @@ import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms'
 })
 export class DashboardComponent implements OnInit {
 
+  isUser=false;
   isLoading = false;
   loading = false;
   gridColumns = 3;
@@ -33,8 +34,9 @@ export class DashboardComponent implements OnInit {
   predskolsko: any;
   knjigeOsnovna: any;
   knjigeSrednja: any;
-  URL = "http://143.198.178.167:8080";
+  URL = "http://localhost:8085";
   emailForm!: FormGroup;
+  loadingButton = false;
 
   constructor(
     private http: HttpClient,
@@ -416,30 +418,46 @@ export class DashboardComponent implements OnInit {
   }
 
   addtoCart(id: any, kolicina: any, naslov: any) {
-    this.isLoading = true;
     // const token = localStorage.getItem('token');
-    if(!this.token) {
+    if(this.token === null) {
       this.snack.open('Ulogujte se da bi ste dodavali proizvode u korpu!', 'Zatvori!', {
         duration: 5000
       });
-      location.reload();
     } else {
-      // this.cart.addToCart(id, kolicina, naslov);
-      this.http.post(`http://143.198.178.167:8080/cart/add-to-cart/${id}`, {'Kolicina': kolicina, 'naslov': naslov}, {'headers': this.headers}).subscribe(
-      (res: any) => {
-        console.log(res)
-        this.isLoading = false;
-      },
-      (err: any) => {
-        console.log(err)
-      },
-      () => {
-        location.reload();
-        this.snack.open('Uspesno dodato!', 'Zatvori!', {
-          duration: 5000
-        });
-      }
-    );
+      this.isUser = true;
+      this.loadingButton = true;
+      this.cart.addToCart(id, kolicina, naslov).subscribe(
+        (res: any) => {
+          console.log(res)
+        },
+        (err: any) => {
+          console.log(err)
+        },
+        () => {
+          this.snack.open('Uspesno dodato!', 'Zatvori!', {
+            duration: 3000
+          })
+          this.loadingButton = false;
+          if(this.isUser) {
+            location.reload();
+          }
+        }
+      )
+    //   this.http.post(`http://localhost:8085/cart/add-to-cart/${id}`, {'Kolicina': kolicina, 'naslov': naslov}, {'headers': this.headers}).subscribe(
+    //   (res: any) => {
+    //     console.log(res)
+    //     this.isLoading = false;
+    //   },
+    //   (err: any) => {
+    //     console.log(err)
+    //   },
+    //   () => {
+    //     location.reload();
+    //     this.snack.open('Uspesno dodato!', 'Zatvori!', {
+    //       duration: 5000
+    //     });
+    //   }
+    // );
     }
   }
 

@@ -12,8 +12,8 @@
     <div id="loginbox" *ngIf="!isLoading" style="margin-top:150px;" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">                    
         <div class="panel panel-info" >
                 <div class="panel-heading">
-                    <div class="panel-title">Sign In</div>
-                    <div style="float:right; font-size: 80%; position: relative; top:-10px"><a routerLink="/restart-password">Forgot password?</a></div>
+                    <div class="panel-title">Ulogujte se</div>
+                    <div style="float:right; font-size: 80%; position: relative; top:-10px"><a routerLink="/restart-password">Zaboravili ste sifru?</a></div>
                 </div>     
 
                 <div style="padding-top:30px" class="panel-body" >
@@ -24,22 +24,22 @@
                                 
                         <div style="margin-bottom: 25px" class="input-group">
                                     <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
-                                    <input id="login-username" type="text" class="form-control" name="email" value="" formControlName="email" placeholder="Enter your email">                                        
+                                    <input id="login-username" type="text" class="form-control" name="email" value="" formControlName="email" placeholder="Unesite Vas email">                                        
                                 </div>
                             
                         <div style="margin-bottom: 25px" class="input-group">
                                     <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
-                                    <input id="login-password" type="password" class="form-control" formControlName="password" name="password" placeholder="password">
+                                    <input id="login-password" type="password" class="form-control" formControlName="password" name="password" placeholder="Vasa sifra">
                                 </div>
 
-                            <div style="margin-top:10px" class="form-group">
+                            <div style="margin-top:10px; text-align: center;" class="form-group">
                                 <!-- Button -->
                                 <mat-error *ngIf="eror != undefined">
                                     {{eror}}
                                 </mat-error>
                                 <div class="col-sm-12 controls">
                                   <!-- <a id="btn-login" href="#" class="btn btn-success">Login  </a> -->
-                                  <button mat-raised-button style="width: 40%;" type="submit" value="submit" color="accent" class="btn btn-success">Login</button>
+                                  <button mat-raised-button style="width: 40%;" type="submit" value="submit" color="accent" class="btn btn-success">Ulogujte se!</button>
                                 </div>
                             </div>
 
@@ -47,9 +47,9 @@
                             <div class="form-group">
                                 <div class="col-md-12 control">
                                     <div style="border-top: 1px solid#888; padding-top:15px; font-size:85%; color: black;" >
-                                        Don't have an account! 
+                                        Nemate nalog? 
                                     <a routerLink="/register">
-                                        Sign Up Here
+                                        Registrujte se
                                     </a>
                                     </div>
                                 </div>

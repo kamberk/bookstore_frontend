@@ -11,10 +11,11 @@ import { Router } from '@angular/router';
 })
 export class SearchComponent implements OnInit {
 
-  
+  isUser = false;
+  loadingButton = false;
   searchTerm!: string;
   term!: string;
-  URL = "http://143.198.178.167:8080";
+  URL = "http://localhost:8085";
   books: any;
   page = 1;
   random: any;
@@ -54,27 +55,46 @@ export class SearchComponent implements OnInit {
   }
 
   addtoCart(id: any, kolicina: any, naslov: any) {
+    this.loadingButton = true;
     const token = localStorage.getItem('token');
     if(!token) {
       this.snack.open('Ulogujte se da bi ste dodavali proizvode u korpu!', 'Zatvori!', {
         duration: 5000
       });
+      this.loadingButton = false;
     } else {
-      // this.cart.addToCart(id, kolicina, naslov);
-      this.http.post(`http://143.198.178.167:8080/cart/add-to-cart/${id}`, {'Kolicina': kolicina, 'naslov': naslov}, {'headers': this.headers}).subscribe(
-      (res: any) => {
-        console.log(res);
-      },
-      (err: any) => {
-        console.log(err)
-      },
-      () => {
-        location.reload();
-        this.snack.open('Uspesno dodato!', 'Zatvori!', {
-          duration: 5000
-        });
-      }
-    );
+      this.isUser = true;
+      this.cart.addToCart(id, kolicina, naslov).subscribe(
+        (res: any) => {
+          console.log(res)
+        },
+        (err: any) => {
+          console.log(err)
+        },
+        () => {
+          this.snack.open('Uspesno dodato!', 'Zatvori!', {
+            duration: 3000
+          })
+          this.loadingButton = false;
+          if(this.isUser) {
+            location.reload();
+          }
+        }
+      )
+    //   this.http.post(`http://localhost:8085/cart/add-to-cart/${id}`, {'Kolicina': kolicina, 'naslov': naslov}, {'headers': this.headers}).subscribe(
+    //   (res: any) => {
+    //     console.log(res);
+    //   },
+    //   (err: any) => {
+    //     console.log(err)
+    //   },
+    //   () => {
+    //     location.reload();
+    //     this.snack.open('Uspesno dodato!', 'Zatvori!', {
+    //       duration: 5000
+    //     });
+    //   }
+    // );
     }
   }
 

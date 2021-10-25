@@ -12,6 +12,7 @@ export class ContactComponent implements OnInit {
 
   isLoading = false;
   FormData!: FormGroup;
+  mesage = false;
 
   constructor(
     private builder: FormBuilder,
@@ -28,21 +29,29 @@ export class ContactComponent implements OnInit {
   }
 
   onSubmit(FormData: any) {
-    this.isLoading = true;
-    console.log(FormData);
-    this.http.post('http://143.198.178.167:8080/user/contact', FormData).subscribe(
-      (res: any) => {
-        console.log(res);
-        this.snack.open('Poslali ste poruku!', 'Zatvori!', {
-          duration: 5000
-        });
-        this.isLoading = false;
-      },
-      (err: any) => {
-        console.log(err)
-        this.isLoading = false;
-      }
-    );
+    if(!this.FormData.valid) {
+      this.mesage = true;
+    } else {
+      this.isLoading = true;
+      console.log(FormData);
+      this.http.post('http://localhost:8085/user/contact', FormData).subscribe(
+        (res: any) => {
+          console.log(res);
+          this.snack.open('Poslali ste poruku!', 'Zatvori!', {
+            duration: 5000
+          });
+          this.isLoading = false;
+        },
+        (err: any) => {
+          console.log(err)
+          this.isLoading = false;
+        },
+        () => {
+          this.mesage = false;
+          this.FormData.reset();
+        }
+      );
+    }
   }
 
 }

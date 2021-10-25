@@ -21,9 +21,10 @@ interface Razred {
 })
 export class AllBooksComponent implements OnInit {
 
+  isUser = false;
   isLoading = false;
   books: any;
-  URL = "http://143.198.178.167:8080";
+  URL = "http://localhost:8085";
 
   skola: Skola[] = [
     {value: 'osnovna', viewValue: 'Osnovna'},
@@ -148,28 +149,49 @@ preusmeri(id: any) {
 
 addtoCart(id: any, kolicina: any, naslov: any) {
   const token = localStorage.getItem('token');
-  this.isLoading = false;
-    if(!token) {
-      this.snack.open('Ulogujte se da bi ste dodavali proizvode u korpu!', 'Zatvori!', {
-        duration: 5000
-      });
-    } else {
-      // this.cart.addToCart(id, kolicina, naslov);
-      this.http.post(`http://143.198.178.167:8080/cart/add-to-cart/${id}`, {'Kolicina': kolicina, 'naslov': naslov}, {'headers': this.headers}).subscribe(
-      (res: any) => {
-        console.log(res)
-        this.isLoading = false;
-      },
-      (err: any) => {
-        console.log(err)
-      },
-      () => {
-        location.reload();
-        this.snack.open('Uspesno dodato!', 'Zatvori!', {
-          duration: 5000
-        });
-      }      
-      );
+  if(token === null) {
+    this.snack.open('Ulogujte se da bi ste dodavali proizvode u korpu!', 'Zatvori!', {
+      duration: 5000
+    });
+  } else {
+      this.isLoading = true;
+      this.isUser = true;
+      this.cart.addToCart(id, kolicina, naslov).subscribe(
+        (res: any) => {
+          console.log(res)
+          this.isLoading = false
+          this.isUser = false
+        },
+        (err: any) => {
+          console.log(err)
+          this.isLoading = false
+          this.isUser = false
+        },
+        () => {
+          this.snack.open('Uspesno dodato!', 'Zatvori!', {
+            duration: 3000
+          })
+          this.isLoading = false;
+          if(this.isUser) {
+            location.reload();
+          }
+        }
+      )
+      // this.http.post(`http://localhost:8085/cart/add-to-cart/${id}`, {'Kolicina': kolicina, 'naslov': naslov}, {'headers': this.headers}).subscribe(
+      // (res: any) => {
+      //   console.log(res)
+      //   this.isLoading = false;
+      // },
+      // (err: any) => {
+      //   console.log(err)
+      // },
+      // () => {
+      //   location.reload();
+      //   this.snack.open('Uspesno dodato!', 'Zatvori!', {
+      //     duration: 5000
+      //   });
+      // }      
+      // );
     }
 }
 

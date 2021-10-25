@@ -18,23 +18,16 @@ export class CartService {
   ) { }
 
   public getCartItems() {
-   return this.http.get('http://143.198.178.167:8080/cart/get-items', {'headers': this.headers});
+   return this.http.get('http://localhost:8085/cart/get-items', {'headers': this.headers});
   }
 
   public addToCart(id: any, kolicina: any, naziv: any) {
     const Kolicina = kolicina;
-    this.http.post(`http://143.198.178.167:8080/cart/add-to-cart/${id}`, {'Kolicina': Kolicina, 'naslov': naziv}, {'headers': this.headers}).subscribe(
-      (res: any) => {
-        console.log(res)
-      },
-      (err: any) => {
-        console.log(err)
-      }
-    )
+    return this.http.post(`http://localhost:8085/cart/add-to-cart/${id}`, {'Kolicina': Kolicina, 'naslov': naziv}, {'headers': this.headers});
   }
 
   public clearCart() {
-    return this.http.get('http://143.198.178.167:8080/cart/clear', {'headers': this.headers});
+    return this.http.get('http://localhost:8085/cart/clear', {'headers': this.headers});
   }
 
   public createOrder(books: any) {
@@ -46,7 +39,7 @@ export class CartService {
   }
 
   public removeOne(id: any) {
-    return this.http.get(`http://143.198.178.167:8080/cart/remove/${id}`, {'headers': this.headers});
+    return this.http.get(`http://localhost:8085/cart/remove/${id}`, {'headers': this.headers});
   }
 
 }

@@ -20,6 +20,9 @@
     <textarea  style="padding: 1rem; font-size: 1.5rem; color: black;" class="form-control" formControlName="Comment" name="Comment">
     </textarea>
     </div>
+    <div style="text-align: center;" *ngIf="mesage">
+        <h3 style="color: red;">Molimo popunite sva polja!</h3>
+    </div>
     <button type="submit" class="btn btn-primary" mat-raised-button color="primary" style="width: 100%; font-size: 2rem;">
         Posalji
         <mat-icon style="margin-left: 1rem;">send</mat-icon>

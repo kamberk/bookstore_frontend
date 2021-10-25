@@ -13,8 +13,8 @@
   </select>
 </mat-form-field>
 
-<h4>Odaberite razred za koji zelite da prikazemo knjige:</h4>
-<mat-form-field appearance="fill">
+<h4 *ngIf="selectedSchool !== 'predskolsko'">Odaberite razred za koji zelite da prikazemo knjige:</h4>
+<mat-form-field appearance="fill" *ngIf="selectedSchool !== 'predskolsko'">
   <mat-label>Razred:</mat-label>
   <select matNativeControl (change)="selectClass($event)">
     <option value="">Prikazi sve!</option>

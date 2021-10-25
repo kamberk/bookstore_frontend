@@ -43,13 +43,13 @@ export class LoginComponent implements OnInit {
 
   onSubmit() {
     if(!this.loginForm.valid) {
-      this.eror = "Please fill all fields!"
+      this.eror = "Molimo popunite sva polja"
       this.snack.open(this.eror, "Close!", {
         duration: 3000
       });
     } else {
       this.isLoading = true;
-      this.http.post('http://143.198.178.167:8080/user/signin', this.loginForm.value).subscribe(
+      this.http.post('http://localhost:8085/user/signin', this.loginForm.value).subscribe(
         (res: any) => {
           localStorage.setItem('profile', JSON.stringify(res.result));
           localStorage.setItem('token', res.token);

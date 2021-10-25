@@ -20,6 +20,10 @@
                 <mat-card-actions>
                   <button mat-button (click)="preusmeri(book._id)"> Detalji<mat-icon>read_more</mat-icon></button>
                   <button mat-button (click)="addtoCart(book._id, 1, book.naslov)" >Dodaj u korpu <mat-icon>shopping_cart</mat-icon></button>
+                  <button mat-raised-button color="primary" *ngIf="loadingButton" disabled>Dodajemo
+                    <mat-icon><mat-spinner diameter="20">
+                    </mat-spinner></mat-icon>
+                  </button>
                 </mat-card-actions>
               </mat-card>
             </div>
@@ -41,6 +45,10 @@
             <mat-card-actions>
               <button mat-button (click)="preusmeri(book._id)"> Detalji<mat-icon>read_more</mat-icon></button>
               <button mat-button (click)="addtoCart(book._id, 1, book.naslov)" >Dodaj u korpu <mat-icon>shopping_cart</mat-icon></button>
+              <button mat-raised-button color="primary" *ngIf="loadingButton" disabled>Dodajemo
+                <mat-icon><mat-spinner diameter="20">
+                </mat-spinner></mat-icon>
+              </button>
             </mat-card-actions>
         </mat-card>
     </div>

@@ -32,7 +32,11 @@
                 <button mat-raised-button color="primary" class="uvecaj" (click)="uvecaj()">+</button> <br>
             </div>
             <h2>Ukupno: {{ukupno}} RSD</h2>
-            <button class="addToCart" (click)="addtoCart(knjiga._id, knjiga.naslov)" mat-raised-button color="primary">Dodaj u korpu <mat-icon>shopping_cart</mat-icon></button>
+            <button class="addToCart" (click)="addtoCart(knjiga._id, knjiga.naslov)" *ngIf="!loadingButton" mat-raised-button color="primary">Dodaj u korpu <mat-icon>shopping_cart</mat-icon></button>
+            <button mat-raised-button class="addToCart" color="primary" *ngIf="loadingButton" disabled>Dodajemo
+                <mat-icon><mat-spinner diameter="20">
+                </mat-spinner></mat-icon>
+              </button>
         </form>
     </div>
 </div>

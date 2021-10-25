@@ -13,6 +13,7 @@ export class ActivateAccountComponent implements OnInit {
 
   tokenForm!: FormGroup;
   isLoading = false;
+  eror = false;
   token: any;
   message: any;
   constructor(
@@ -32,19 +33,28 @@ export class ActivateAccountComponent implements OnInit {
   
   activate() {
     this.isLoading = true;
-    this.http.get(`http://143.198.178.167:8080/user/activate-acc/${this.token}`).subscribe(
+    this.http.get(`http://localhost:8085/user/activate-acc/${this.token}`).subscribe(
       (res: any) => {
         console.log(res)
         this.isLoading = false;
         this.message = res.message;
-        this.snack.open(this.message, 'Close!', {
+        this.snack.open('Uspesno aktiviran nalog!', 'Zatvori!', {
           duration: 5000
         });
-        this.router.navigate(['/login']);
       },
       err => {
         console.log(err);
         this.isLoading = false;
+        this.eror = true;
+        this.snack.open('Proverite link na mailu i pokusajte opet!', 'Zatvori');
+      },
+      () => {
+        if(!this.eror) {
+          this.router.navigate(['/login']);
+          location.reload()
+        } else {
+          console.log('Imamo problem!')
+        }
       }
     )
   }

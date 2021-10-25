@@ -62,7 +62,7 @@ export class UserComponent implements OnInit {
       zipcode: [`${this.fourthFormGroup.value.fourthCtrl}`]
     });
     console.log(this.forma.value);
-    this.http.post('http://143.198.178.167:8080/user/delivery-info', this.forma.value, {headers: this.headers}).subscribe(
+    this.http.post('http://localhost:8085/user/delivery-info', this.forma.value, {headers: this.headers}).subscribe(
       (res: any) => {
         console.log(res)
         this.isLoading = false;
@@ -91,7 +91,7 @@ export class UserComponent implements OnInit {
     this.isLoading = true;
     dialogRef.afterClosed().subscribe((confirmed: boolean) => {
       if(confirmed) {
-        this.http.delete('http://143.198.178.167:8080/user/deleteUser', {headers: this.headers}).subscribe(
+        this.http.delete('http://localhost:8085/user/deleteUser', {headers: this.headers}).subscribe(
           (res: any) => {
             this.message = res.message;
             this.snack.open(this.message, 'Close!', {

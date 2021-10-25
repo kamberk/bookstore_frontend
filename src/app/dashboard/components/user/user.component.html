@@ -14,7 +14,7 @@
                       <button mat-raised-button
                       color="warn" style="margin-top: 5px;"
                       (click)="openDialog()"
-                      >Delete account</button>
+                      >Izbrisite nalog! <mat-icon>delete</mat-icon></button>
                     </div>
                   </div>
                 </div>
@@ -63,8 +63,9 @@
         </div>
     </div>
     <mat-divider style="margin-top: 5px; margin-bottom: 5px; width: 80%; margin-left: auto; margin-right: auto;"></mat-divider>
+    <div class="steps">
     <div style="width: 80%; margin: auto; color: white;">
-        <h1 style="margin: auto;">Edit delivery info<span style="margin-left: 10px;" class="glyphicon glyphicon-envelope"></span></h1>
+        <h1 style="margin: auto; text-align: center;">Uredite informacije za dostavu<span style="margin-left: 10px;" class="glyphicon glyphicon-envelope"></span></h1>
     </div>
     <mat-divider style="margin-top: 5px; margin-bottom: 5px; width: 80%; margin-left: auto; margin-right: auto;"></mat-divider>
     <div *ngIf="isLoading">
@@ -73,65 +74,65 @@
     <mat-stepper linear orientation="vertical" #stepper style="width: 80%; margin: auto;" *ngIf="!isLoading">
         <mat-step [stepControl]="firstFormGroup">
           <form [formGroup]="firstFormGroup">
-            <ng-template matStepLabel>Is your email right?</ng-template>
+            <ng-template matStepLabel>Je li Vas email ispravan?</ng-template>
             <mat-form-field appearance="fill" style="width: 80%;" [style.fontSize.px]=14>
               <mat-label>Email</mat-label>
               <input matInput formControlName="firstCtrl" style="color: white;" placeholder="Last name, First name" required>
             </mat-form-field>
             <div>
-              <button mat-raised-button color="accent" matStepperNext>Next</button>
+              <button mat-raised-button color="accent" matStepperNext>Dalje</button>
             </div>
           </form>
         </mat-step>
         <mat-step [stepControl]="secondFormGroup">
           <form [formGroup]="secondFormGroup">
-            <ng-template matStepLabel>Street and house number:</ng-template>
+            <ng-template matStepLabel>Ulica i kucni broj:</ng-template>
             <mat-form-field appearance="fill" style="width: 80%;" [style.fontSize.px]=14>
-              <mat-label>Street and house number:</mat-label>
-              <input matInput style="color: white;" formControlName="secondCtrl" placeholder="Street and house number"
+              <mat-label>Ulica i kucni broj</mat-label>
+              <input matInput style="color: white;" formControlName="secondCtrl" placeholder="Ulica i kucni broj"
                      required>
             </mat-form-field>
             <div>
-              <button mat-raised-button color="accent" matStepperNext>Next</button>
+              <button mat-raised-button color="accent" matStepperNext>Dalje</button>
             </div>
           </form>
         </mat-step>
         <mat-step [stepControl]="thirdFormGroup">
             <form [formGroup]="thirdFormGroup">
-              <ng-template matStepLabel>Municipality / Place:</ng-template>
+              <ng-template matStepLabel>Grad / Drzava:</ng-template>
               <mat-form-field appearance="fill" style="width: 80%;" [style.fontSize.px]=14>
-                <mat-label>Municipality / Place:</mat-label>
-                <input matInput style="color: white;" formControlName="thirdCtrl" placeholder="Municipality / Place"
+                <mat-label>Grad / Drzava:</mat-label>
+                <input matInput style="color: white;" formControlName="thirdCtrl" placeholder="Grad / Drzava"
                        required>
               </mat-form-field>
               <div>
-                <button mat-raised-button color="warn" matStepperPrevious>Back</button>
-                <button mat-raised-button color="accent" matStepperNext>Next</button>
+                <button class="nazad" mat-raised-button color="warn" matStepperPrevious>Nazad</button>
+                <button mat-raised-button color="accent" matStepperNext>Dalje</button>
               </div>
             </form>
           </mat-step>
           <mat-step [stepControl]="fourthFormGroup">
             <form [formGroup]="fourthFormGroup">
-              <ng-template matStepLabel>Zip Code:</ng-template>
+              <ng-template matStepLabel>Postanski kod:</ng-template>
               <mat-form-field appearance="fill" style="width: 80%;" [style.fontSize.px]=14>
-                <mat-label>Zip Code:</mat-label>
-                <input matInput style="color: white;" formControlName="fourthCtrl" placeholder="Zip Code" 
+                <mat-label>Postanski kod:</mat-label>
+                <input matInput style="color: white;" formControlName="fourthCtrl" placeholder="Postanski kod" 
                        required>
               </mat-form-field>
               <div>
-                <button mat-raised-button color="warn" matStepperPrevious>Back</button>
-                <button mat-raised-button color="accent" matStepperNext>Next</button>
+                <button class="nazad" mat-raised-button color="warn" matStepperPrevious>Nazad</button>
+                <button mat-raised-button color="accent" matStepperNext>Dalje</button>
               </div>
             </form>
           </mat-step>
         <mat-step>
-          <ng-template matStepLabel>Save</ng-template>
-          <h3 style="color: white;">You can save delivery information now</h3>
+          <ng-template matStepLabel>Sacuvaj</ng-template>
+          <h3 style="color: white;">Sacuvaj/azuriraj informacije za dostavu</h3>
           <div>
-            <button mat-raised-button color="warn" matStepperPrevious>Back</button>
-            <button mat-raised-button color="accent" (click)="onSubmit()">Save</button>
+            <button class="nazad" mat-raised-button color="warn" matStepperPrevious>Nazad</button>
+            <button mat-raised-button color="accent" (click)="onSubmit()">Sacuvaj</button>
           </div>
         </mat-step>
       </mat-stepper>
-
+    </div>
 </body>
