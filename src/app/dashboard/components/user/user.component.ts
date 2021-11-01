@@ -81,10 +81,10 @@ export class UserComponent implements OnInit {
   openDialog() {
     const dialogRef = this.dialog.open(ConfDialogComponent, {
       data: {
-        message: 'Are you sure you want to delete your account?',
+        message: 'Jeste li sigurni da zelite da izbrisete svoj nalog?',
         buttonText: {
-          ok: 'Delete!',
-          cancel: 'Cancel'
+          ok: 'Izbrisi!',
+          cancel: 'Ponisti'
         }
       }
     })
@@ -94,7 +94,7 @@ export class UserComponent implements OnInit {
         this.http.delete('http://localhost:8085/user/deleteUser', {headers: this.headers}).subscribe(
           (res: any) => {
             this.message = res.message;
-            this.snack.open(this.message, 'Close!', {
+            this.snack.open(this.message, 'Zatvori!', {
               duration: 5000
             });
             this.isLoading = false;

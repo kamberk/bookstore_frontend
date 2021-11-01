@@ -38,8 +38,8 @@ export class SignupComponent implements OnInit {
 
   onSubmit(){
     if(!this.signupForm.valid) {
-      this.eror = "Please fill all fields!"
-      this.snack.open(this.eror, "Close!", {
+      this.eror = "Molimo popunite sva polja!"
+      this.snack.open(this.eror, "Zatvori!", {
         duration: 3000
       });
     } else {
@@ -56,7 +56,7 @@ export class SignupComponent implements OnInit {
         console.log(err.error.message);
         this.eror = err.error.message;
         this.isLoading = false;
-        this.snack.open(this.eror, 'Close!', {
+        this.snack.open(this.eror, 'Zatvori!', {
           duration: 50000,
         })
       }

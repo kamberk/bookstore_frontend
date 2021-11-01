@@ -30,6 +30,14 @@
                 <span *ngIf="expanded">Info</span>
             </mat-list-item>
 
+            <mat-list-item routerLink="/contact" 
+                matTooltip="Kontakt!"
+                matTooltipClass="example-tooltip-red"
+            >
+                <mat-icon mat-list-icon>contact_support</mat-icon>
+                <span *ngIf="expanded">Kontakt</span>
+            </mat-list-item>
+
             <mat-list-item routerLink="/all-books" 
                 matTooltip="Sve knjige"
                 matTooltipClass="example-tooltip-red"

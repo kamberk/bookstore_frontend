@@ -8,9 +8,9 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 })
 export class ConfDialogComponent implements OnInit {
 
-  message: string = "Are you sure?"
-  confirmButtonText = "Yes"
-  cancelButtonText = "Cancel"
+  message: string = "Jeste li sigurni?"
+  confirmButtonText = "Izbrisi!"
+  cancelButtonText = "Ponisti!"
 
   constructor(
     @Inject(MAT_DIALOG_DATA) private data: any,

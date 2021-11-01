@@ -81,7 +81,7 @@ export class AllBooksComponent implements OnInit {
         }
       )
     } else {
-      this.http.get(`${this.URL}/api/get-by-school/${(event.target as HTMLSelectElement).value}/${this.page}`).subscribe(
+      this.http.get(`${this.URL}/api/get-all-by-school/${(event.target as HTMLSelectElement).value}`).subscribe(
         (res: any) => {
           this.books = res 
           if(this.books.length === 0) {
@@ -101,7 +101,7 @@ export class AllBooksComponent implements OnInit {
     this.selectedClass = (event.target as HTMLSelectElement).value;
     const razred = parseInt(this.selectedClass);
     if(this.selectedSchool === '') {
-      this.http.get(`${this.URL}/api/get-by-class/${this.page}/${razred}/none`).subscribe(
+      this.http.get(`${this.URL}/api/get-all-by-class/${razred}/none`).subscribe(
         (res: any) => {
           this.books = res;
           if(this.books.length === 0) {
@@ -127,7 +127,7 @@ export class AllBooksComponent implements OnInit {
         }
       )
     } else {
-      this.http.get(`${this.URL}/api/get-by-class/${this.page}/${razred}/${this.selectedSchool}`).subscribe(
+      this.http.get(`${this.URL}/api/get-all-by-class/${razred}/${this.selectedSchool}`).subscribe(
         (res: any) => {
           console.log(res)
           this.books = res;
@@ -160,7 +160,7 @@ addtoCart(id: any, kolicina: any, naslov: any) {
         (res: any) => {
           console.log(res)
           this.isLoading = false
-          this.isUser = false
+          this.isUser = true
         },
         (err: any) => {
           console.log(err)
@@ -177,21 +177,6 @@ addtoCart(id: any, kolicina: any, naslov: any) {
           }
         }
       )
-      // this.http.post(`http://localhost:8085/cart/add-to-cart/${id}`, {'Kolicina': kolicina, 'naslov': naslov}, {'headers': this.headers}).subscribe(
-      // (res: any) => {
-      //   console.log(res)
-      //   this.isLoading = false;
-      // },
-      // (err: any) => {
-      //   console.log(err)
-      // },
-      // () => {
-      //   location.reload();
-      //   this.snack.open('Uspesno dodato!', 'Zatvori!', {
-      //     duration: 5000
-      //   });
-      // }      
-      // );
     }
 }
 
